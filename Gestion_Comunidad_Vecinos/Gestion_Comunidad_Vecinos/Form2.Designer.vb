@@ -69,7 +69,7 @@ Partial Class FAltaCV
         '
         'Binicio
         '
-        Me.Binicio.Location = New System.Drawing.Point(17, 261)
+        Me.Binicio.Location = New System.Drawing.Point(236, 418)
         Me.Binicio.Name = "Binicio"
         Me.Binicio.Size = New System.Drawing.Size(50, 23)
         Me.Binicio.TabIndex = 12
@@ -78,7 +78,7 @@ Partial Class FAltaCV
         '
         'Bfin
         '
-        Me.Bfin.Location = New System.Drawing.Point(729, 261)
+        Me.Bfin.Location = New System.Drawing.Point(515, 420)
         Me.Bfin.Name = "Bfin"
         Me.Bfin.Size = New System.Drawing.Size(50, 23)
         Me.Bfin.TabIndex = 15
@@ -87,7 +87,7 @@ Partial Class FAltaCV
         '
         'Batras
         '
-        Me.Batras.Location = New System.Drawing.Point(83, 261)
+        Me.Batras.Location = New System.Drawing.Point(302, 418)
         Me.Batras.Name = "Batras"
         Me.Batras.Size = New System.Drawing.Size(38, 23)
         Me.Batras.TabIndex = 13
@@ -96,7 +96,7 @@ Partial Class FAltaCV
         '
         'Badelante
         '
-        Me.Badelante.Location = New System.Drawing.Point(677, 261)
+        Me.Badelante.Location = New System.Drawing.Point(463, 420)
         Me.Badelante.Name = "Badelante"
         Me.Badelante.Size = New System.Drawing.Size(38, 23)
         Me.Badelante.TabIndex = 14
@@ -143,14 +143,14 @@ Partial Class FAltaCV
         '
         'CalendarioMes1
         '
-        Me.CalendarioMes1.Location = New System.Drawing.Point(328, 174)
+        Me.CalendarioMes1.Location = New System.Drawing.Point(329, 182)
         Me.CalendarioMes1.Name = "CalendarioMes1"
         Me.CalendarioMes1.TabIndex = 24
         Me.CalendarioMes1.Visible = False
         '
         'CalendarioMes2
         '
-        Me.CalendarioMes2.Location = New System.Drawing.Point(328, 174)
+        Me.CalendarioMes2.Location = New System.Drawing.Point(329, 182)
         Me.CalendarioMes2.Name = "CalendarioMes2"
         Me.CalendarioMes2.TabIndex = 26
         Me.CalendarioMes2.Visible = False

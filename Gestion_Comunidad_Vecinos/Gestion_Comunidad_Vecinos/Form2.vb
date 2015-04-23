@@ -267,8 +267,11 @@ Public Class FAltaCV
         Texttvecinos.Text = ds.Tables("comunidad").Rows(p1).Item("totalvecinos").ToString
         Textnplantas.Text = ds.Tables("comunidad").Rows(p1).Item("nplantas").ToString
         Textvplanta.Text = ds.Tables("comunidad").Rows(p1).Item("vecinosplanta").ToString
-        TBalta.Text = ds.Tables("comunidad").Rows(p1).Item("falta").ToString
-        TBbaja.Text = ds.Tables("comunidad").Rows(p1).Item("fbaja").ToString
+        TBalta.Text = CStr(CDate(ds.Tables("comunidad").Rows(p1).Item("falta").ToString))
+
+        If ds.Tables("comunidad").Rows(p1).Item("fbaja").ToString <> "" Then
+            TBbaja.Text = CStr(CDate(ds.Tables("comunidad").Rows(p1).Item("fbaja").ToString))
+        End If
 
         BGuardar.Text = "Guardar Modificaciones"
     End Sub
@@ -365,10 +368,22 @@ Public Class FAltaCV
 
 
     Private Sub PictureBox1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox1.Click
-        CalendarioMes1.Visible = True
+
+        If CalendarioMes1.Visible = True Then
+            CalendarioMes1.Visible = False
+        Else
+            CalendarioMes1.Visible = True
+        End If
+
     End Sub
     Private Sub PictureBox2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox2.Click
-        CalendarioMes2.Visible = True
+
+        If CalendarioMes2.Visible = True Then
+            CalendarioMes2.Visible = False
+        Else
+            CalendarioMes2.Visible = True
+        End If
+
     End Sub
 
     Private Sub PictureBox1_MouseEnter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox1.MouseEnter
@@ -389,24 +404,34 @@ Public Class FAltaCV
     Private Sub CalendarioMes1_DateChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DateRangeEventArgs) Handles CalendarioMes1.DateChanged
         TBalta.Text = CStr(CDate(CalendarioMes1.SelectionRange.Start))
     End Sub
+
+    Private Sub CalendarioMes1_DateSelected(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DateRangeEventArgs) Handles CalendarioMes1.DateSelected
+        CalendarioMes1.Visible = False
+    End Sub
+
+    Private Sub CalendarioMes1_MouseEnter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CalendarioMes1.MouseEnter
+        CalendarioMes1.Visible = True
+    End Sub
+
+    Private Sub CalendarioMes1_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CalendarioMes1.MouseLeave
+        CalendarioMes1.Visible = False
+    End Sub
+
     Private Sub CalendarioMes2_DateChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DateRangeEventArgs) Handles CalendarioMes2.DateChanged
         TBbaja.Text = CStr(CDate(CalendarioMes2.SelectionRange.Start))
     End Sub
 
-    Private Sub CalendarioMes1_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CalendarioMes1.MouseLeave, CalendarioMes1.MouseEnter
-        CalendarioMes1.Visible = False
-    End Sub
-    Private Sub CalendarioMes2_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CalendarioMes1.MouseLeave, CalendarioMes2.MouseEnter
+    Private Sub CalendarioMes2_DateSelected(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DateRangeEventArgs) Handles CalendarioMes2.DateSelected
         CalendarioMes2.Visible = False
     End Sub
 
-    ' Private Sub Texttvecinos_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Texttvecinos.Enter
+    Private Sub CalendarioMes2_MouseEnter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CalendarioMes2.MouseEnter
+        CalendarioMes2.Visible = True
+    End Sub
 
-    'If Textnplantas.Text <> "" And Textvplanta.Text <> "" Then
-    'Texttvecinos.Text = CStr(CInt(Textnplantas.Text) * CInt(Textvplanta.Text))
-    ' End If
-
-    'End Sub
+    Private Sub CalendarioMes2_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CalendarioMes2.MouseLeave
+        CalendarioMes2.Visible = False
+    End Sub
 
 
 End Class
