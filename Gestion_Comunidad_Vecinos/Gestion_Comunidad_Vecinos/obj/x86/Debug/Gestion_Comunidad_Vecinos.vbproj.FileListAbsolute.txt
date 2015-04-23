@@ -9,3 +9,14 @@ D:\VBNet\UD_3\Proyecto_Final\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos
 D:\VBNet\UD_3\Proyecto_Final\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.pdb
 D:\VBNet\UD_3\Proyecto_Final\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.Form2.resources
 D:\VBNet\UD_3\Proyecto_Final\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.Form3.resources
+D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.exe
+D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.xml
+D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.pdb
+D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.Resources.resources
+D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.vbproj.GenerateResource.Cache
+D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\bin\Debug\Gestion_Comunidad_Vecinos.exe
+D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\bin\Debug\Gestion_Comunidad_Vecinos.pdb
+D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\bin\Debug\Gestion_Comunidad_Vecinos.xml
+D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.FInicio.resources
+D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.FAltaCV.resources
+D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.FMenuCV.resources

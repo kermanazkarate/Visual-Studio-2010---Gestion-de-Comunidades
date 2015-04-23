@@ -1,15 +1,15 @@
 ﻿
-Public Class Form2
+Public Class FAltaCV
 
     Public nuevoReg As Boolean = False  'variable que indica si estamos en un nuevo registro en la tabla comunidad
 
     Private Sub BVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BVolver.Click
-        Form1.BringToFront()
-        Form1.Enabled = True
+        FInicio.BringToFront()
+        FInicio.Enabled = True
         Close()
     End Sub
 
-    Private Sub Form2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub FAltaCV_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         ds.Clear()
 
@@ -19,7 +19,7 @@ Public Class Form2
             MostrarRegistros(inc)
         Else
             BNuevo.Enabled = False
-            BBorrar.Enabled = False
+            BBaja.Enabled = False
             Binicio.Enabled = False
             Batras.Enabled = False
             Badelante.Enabled = False
@@ -30,36 +30,62 @@ Public Class Form2
         End If
 
         TopMost = True
-        Form1.Enabled = False
+        FInicio.Enabled = False
 
     End Sub
 
-
-
-
     'Borrar significa poner el campo estadoAlta con Valor No. No quiero borrar ningun registro. Quiero que la tabla comunidad sea  una tabla histórica
-    Private Sub BBorrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BBorrar.Click
-
-        Dim respuesta As MsgBoxResult
+    Private Sub Bbajar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BBaja.Click
 
         Dim cb As New OleDb.OleDbCommandBuilder(da) ' Es obligatorio para luego usar da.Update(ds, "comunidad")
 
-        respuesta = MsgBox("Borrado de registro. ¿Desea continuar?", CType(4, MsgBoxStyle), "Cuidado!!!") ' mensaje con si/no
+        Dim respuesta As MsgBoxResult
 
-        If respuesta = MsgBoxResult.Yes Then
-            'pongo el estado de ese registro a No (que es como borrarlo)
-            ' ds.Tables("comunidad").Rows(inc).Item("falta") = "No"
+        'Habilito el campo fecha de baja para meter la fecha y deshabilito el resto de campos
+        Textcod.Enabled = False
+        Textcalle.Enabled = False
+        Textnum.Enabled = False
+        Textnplantas.Enabled = False
+        Textvplanta.Enabled = False
+        Texttvecinos.Enabled = False
+        TBalta.Enabled = False
+        TBbaja.Enabled = True
+        TBbaja.Focus()
 
-            ' da.Update(ds, "comunidad")
+        'deshabilito los botones de Alta y Baja
+        BNuevo.Enabled = False
+        BBaja.Enabled = False
 
-            ' MsgBox("Registro Borrado de la base de datos")
+        BGuardar.Text = "Aceptar"
 
-            ' limpiarCamposForm2()
-            '  ConectarBD()
+        'dsNewRow.Item("fbaja") = CDate(TBbaja.Text)
 
-            '  MostrarRegistros(inc)
+        If TBbaja.Text <> "" Then
+
+            respuesta = MsgBox("Borrado de registro. ¿Desea continuar?", CType(4, MsgBoxStyle), "Cuidado!!!") ' mensaje con si/no
+
+            If respuesta = MsgBoxResult.Yes Then
+                'pongo el estado de ese registro a No (que es como borrarlo)
+                ' ds.Tables("comunidad").Rows(inc).Item("falta") = "No"
+
+                ' da.Update(ds, "comunidad")
+
+                ' MsgBox("Registro Borrado de la base de datos")
+
+                ' limpiarCamposForm2()
+                '  ConectarBD()
+
+                '  MostrarRegistros(inc)
+
+            End If
+
+        Else
+            MsgBox("Hay que introducir una fecha de baja", CType(0, MsgBoxStyle), "Atención!!!")
+            TBbaja.Focus()
 
         End If
+
+
 
     End Sub
 
@@ -69,50 +95,75 @@ Public Class Form2
         Dim respuesta As MsgBoxResult
         Dim cb As New OleDb.OleDbCommandBuilder(da) ' Es obligatorio para luego usar da.Update(ds, "comunidad")
 
-        Try
-            ds.Tables("comunidad").Rows(inc).Item("codcomunidad") = CInt(Textcod.Text)
-            ds.Tables("comunidad").Rows(inc).Item("calle") = Textcalle.Text
-            ds.Tables("comunidad").Rows(inc).Item("numero") = CInt(Textnum.Text)
-            ds.Tables("comunidad").Rows(inc).Item("nplantas") = CInt(Textnplantas.Text)
-            ds.Tables("comunidad").Rows(inc).Item("vecinosplanta") = CInt(Textvplanta.Text)
-            ds.Tables("comunidad").Rows(inc).Item("totalvecinos") = CInt(Texttvecinos.Text)
-            ds.Tables("comunidad").Rows(inc).Item("falta") = CInt(TBalta.Text)
-            'ds.Tables("comunidad").Rows(inc).Item("fbaja") = CInt(TBbaja.Text)
+        Dim dsNewRow As DataRow
 
-            respuesta = MsgBox("Se guardará el registro (y cambios efectuados). ¿Desea continuar?", CType(4, MsgBoxStyle), "Cuidado!!!") 'ventada de si/no
+        Dim BGuardarTexto As String
 
+        BGuardarTexto = BGuardar.Text
 
-            ' MsgBox(rpt1)  'SI implica rpt1= 6  y NO implica rpt1 = 7
+        Select Case BGuardarTexto
+            Case "Guardar"  'Despues de ejecutar el botón Nueva Comunidad, se pone en  Guardar para dar de alta el registro introducido. 
+                dsNewRow = ds.Tables("comunidad").NewRow
 
-            If respuesta = MsgBoxResult.Yes Then
+                'No se puede guardar hasta que no se completen todos los campos 
+                If Textcod.Text = "" Or Textcalle.Text = "" Or Textnum.Text = "" Or Textnplantas.Text = "" Or Textvplanta.Text = "" Or Texttvecinos.Text = "" Then
+                    MsgBox("Hay que rellenar todos los campos", CType(0, MsgBoxStyle), "Atención!!!") ' ventana de ok
+                Else
+                    Try
+                        dsNewRow.Item("codcomunidad") = CInt(Textcod.Text)
+                        dsNewRow.Item("calle") = Textcalle.Text
+                        dsNewRow.Item("numero") = CInt(Textnum.Text)
+                        dsNewRow.Item("nplantas") = CInt(Textnplantas.Text)
+                        dsNewRow.Item("vecinosplanta") = CInt(Textvplanta.Text)
+                        dsNewRow.Item("totalvecinos") = CInt(Texttvecinos.Text)
+                        dsNewRow.Item("falta") = CDate(TBalta.Text)
+                        'dsNewRow.Item("fbaja") = CDate(TBbaja.Text)
 
-                da.Update(ds, "comunidad")
-                MsgBox("Datos acutalizados")
+                        respuesta = MsgBox("Se guardará el registro (y cambios efectuados). ¿Desea continuar?", CType(4, MsgBoxStyle), "Cuidado!!!") 'ventada de si/no
 
-                MsgBox("Registro guardado a la base de datos")
+                        If respuesta = MsgBoxResult.Yes Then  'si la respuesta es si
 
-                MostrarRegistros(inc)
+                            'Se añade la nueva fila creada al dataset
+                            ds.Tables("comunidad").Rows.Add(dsNewRow)
 
-            Else
+                            'Se actualiza el dataset
+                            da.Update(ds, "comunidad")
 
-                MostrarRegistros(inc)
+                            'Se calcula el nº de filas que tiene ahora el dataset
+                            MaxRows = ds.Tables("comunidad").Rows.Count
 
-            End If
+                            MostrarRegistros(inc)
 
-            BNuevo.Enabled = True
-            BBorrar.Enabled = True
+                        Else
 
-        Catch ex As Exception
-            MsgBox("Hay que rellenar todos los campos antes de guardar el registro")
-        End Try
+                            MostrarRegistros(inc)
+
+                        End If
+
+                        BNuevo.Enabled = True
+                        BBaja.Enabled = True
+
+                    Catch ex As Exception
+                        MsgBox("Error: " & ex.Message)
+                    End Try
+
+                    nuevoReg = False
+
+                End If
+            Case "Guardar Modificaciones"  ' Valor Guardar Modificaciones cuando se cambia el valor de algún campo. No se ejecuta los botones de Alta ni de Baja
+
+            Case "Aceptar"  'Despues de ejecutar el botón Baja Comunidad, se pone a Aceptar para borrar el registro en curso. 
+
+            Case Else
+                'mmm
+        End Select
+
+        BGuardar.Text = "Guardar Modificaciones"
 
     End Sub
 
 
     Private Sub BNuevo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BNuevo.Click
-
-
-
 
         nuevoReg = True
 
@@ -122,6 +173,7 @@ Public Class Form2
 
         TBalta.Enabled = False
         TBbaja.Enabled = False
+        BGuardar.Text = "Guardar"
 
         inc = MaxRows
 
@@ -131,7 +183,7 @@ Public Class Form2
         Textcalle.Focus()
 
         BNuevo.Enabled = False
-        BBorrar.Enabled = False
+        BBaja.Enabled = False
 
     End Sub
 
@@ -159,7 +211,7 @@ Public Class Form2
             MostrarRegistros(inc)
         End If
         BNuevo.Enabled = True
-        BBorrar.Enabled = True
+        BBaja.Enabled = True
 
     End Sub
 
@@ -187,12 +239,12 @@ Public Class Form2
                 nuevoReg = False
             End If
         Else
-                inc = 0
-                MostrarRegistros(inc)
+            inc = 0
+            MostrarRegistros(inc)
         End If
 
         BNuevo.Enabled = True
-        BBorrar.Enabled = True
+        BBaja.Enabled = True
 
     End Sub
 
@@ -218,6 +270,7 @@ Public Class Form2
         TBalta.Text = ds.Tables("comunidad").Rows(p1).Item("falta").ToString
         TBbaja.Text = ds.Tables("comunidad").Rows(p1).Item("fbaja").ToString
 
+        BGuardar.Text = "Guardar Modificaciones"
     End Sub
 
     Private Sub limpiarCamposForm2()
@@ -314,6 +367,9 @@ Public Class Form2
     Private Sub PictureBox1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox1.Click
         CalendarioMes1.Visible = True
     End Sub
+    Private Sub PictureBox2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox2.Click
+        CalendarioMes2.Visible = True
+    End Sub
 
     Private Sub PictureBox1_MouseEnter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox1.MouseEnter
         PictureBox1.Cursor = Cursors.Hand
@@ -322,12 +378,35 @@ Public Class Form2
     Private Sub PictureBox1_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox1.MouseLeave
         PictureBox1.Cursor = Cursors.Arrow
     End Sub
+    Private Sub PictureBox2_MouseEnter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox2.MouseEnter
+        PictureBox2.Cursor = Cursors.Hand
+    End Sub
+
+    Private Sub PictureBox2_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox2.MouseLeave
+        PictureBox2.Cursor = Cursors.Arrow
+    End Sub
 
     Private Sub CalendarioMes1_DateChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DateRangeEventArgs) Handles CalendarioMes1.DateChanged
-
+        TBalta.Text = CStr(CDate(CalendarioMes1.SelectionRange.Start))
+    End Sub
+    Private Sub CalendarioMes2_DateChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DateRangeEventArgs) Handles CalendarioMes2.DateChanged
+        TBbaja.Text = CStr(CDate(CalendarioMes2.SelectionRange.Start))
     End Sub
 
-    Private Sub CalendarioMes1_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CalendarioMes1.MouseLeave
-        CalendarioMes1.Visible
+    Private Sub CalendarioMes1_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CalendarioMes1.MouseLeave, CalendarioMes1.MouseEnter
+        CalendarioMes1.Visible = False
     End Sub
+    Private Sub CalendarioMes2_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CalendarioMes1.MouseLeave, CalendarioMes2.MouseEnter
+        CalendarioMes2.Visible = False
+    End Sub
+
+    ' Private Sub Texttvecinos_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Texttvecinos.Enter
+
+    'If Textnplantas.Text <> "" And Textvplanta.Text <> "" Then
+    'Texttvecinos.Text = CStr(CInt(Textnplantas.Text) * CInt(Textvplanta.Text))
+    ' End If
+
+    'End Sub
+
+
 End Class

@@ -1,6 +1,6 @@
-﻿Public Class Form1
+﻿Public Class FInicio
 
-    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub FInicio_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Dim c1, c2 As String
 
         Me.Enabled = True
@@ -11,7 +11,7 @@
         For i = 0 To MaxRows - 1
             c1 = CStr(ds.Tables("comunidad").Rows(i).Item("calle"))
             c2 = CStr(ds.Tables("comunidad").Rows(i).Item("numero"))
-            CBComunidad.Items.Add(c1 & " " & c2)
+            CBComunidad.Items.Add("C/ " & c1 & " " & c2)
         Next
 
     End Sub
@@ -20,13 +20,13 @@
     End Sub
 
     Private Sub BABMCV_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BABMCV.Click
-        Dim frm As New Form2()
+        Dim frm As New FAltaCV()
         Me.Enabled = False
         frm.Show()
     End Sub
 
     Private Sub BEntrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BEntrar.Click
-        Dim frm As New Form3()
+        Dim frm As New FMenuCV()
         Me.Enabled = False
         frm.Show()
     End Sub
