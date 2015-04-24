@@ -2,6 +2,9 @@
 Public Class FAltaCV
 
     Public nuevoReg As Boolean = False  'variable que indica si estamos en un nuevo registro en la tabla comunidad
+    Public accion As String = "nada"  'esta variable tiene 4 valores: nada, alta, baja, modifica
+    Public botCalendario As Integer = 0  'este variable controla que boton del calendario se pulsa
+
 
     Private Sub BVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BVolver.Click
         FInicio.BringToFront()
@@ -11,6 +14,9 @@ Public Class FAltaCV
 
     Private Sub FAltaCV_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        MsgBox("Ultimo valor mas alto" & ultimoNreg)
+        accion = "nada"
+        MostrarSituacionInicial()
         ds.Clear()
 
         ConectarBD()
@@ -18,7 +24,7 @@ Public Class FAltaCV
         If MaxRows > 0 Then
             MostrarRegistros(inc)
         Else
-            BNuevo.Enabled = False
+            BAlta.Enabled = False
             BBaja.Enabled = False
             Binicio.Enabled = False
             Batras.Enabled = False
@@ -34,156 +40,188 @@ Public Class FAltaCV
 
     End Sub
 
-    'Borrar significa poner el campo estadoAlta con Valor No. No quiero borrar ningun registro. Quiero que la tabla comunidad sea  una tabla histórica
-    Private Sub Bbajar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BBaja.Click
+    Private Sub BModificaciones_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BModificaciones.Click
 
-        Dim cb As New OleDb.OleDbCommandBuilder(da) ' Es obligatorio para luego usar da.Update(ds, "comunidad")
+        'muetro botón Aceptar
+        BAceptar.Visible = True
+        BAceptar.Enabled = True
 
-        Dim respuesta As MsgBoxResult
+        'habilito los campos de texto
+        habilitarCamposTexto()
 
-        'Habilito el campo fecha de baja para meter la fecha y deshabilito el resto de campos
-        Textcod.Enabled = False
-        Textcalle.Enabled = False
-        Textnum.Enabled = False
-        Textnplantas.Enabled = False
-        Textvplanta.Enabled = False
-        Texttvecinos.Enabled = False
-        TBalta.Enabled = False
-        TBbaja.Enabled = True
-        TBbaja.Focus()
+        'Pongo el foco del cursor en el campo calle
+        Textcalle.Focus()
 
-        'deshabilito los botones de Alta y Baja
-        BNuevo.Enabled = False
-        BBaja.Enabled = False
+        'Deshabilito botones de Altas y Bajas y modificaciones
+        deshabilitarAltaBajaModi()
 
-        BGuardar.Text = "Aceptar"
-
-        'dsNewRow.Item("fbaja") = CDate(TBbaja.Text)
-
-        If TBbaja.Text <> "" Then
-
-            respuesta = MsgBox("Borrado de registro. ¿Desea continuar?", CType(4, MsgBoxStyle), "Cuidado!!!") ' mensaje con si/no
-
-            If respuesta = MsgBoxResult.Yes Then
-                'pongo el estado de ese registro a No (que es como borrarlo)
-                ' ds.Tables("comunidad").Rows(inc).Item("falta") = "No"
-
-                ' da.Update(ds, "comunidad")
-
-                ' MsgBox("Registro Borrado de la base de datos")
-
-                ' limpiarCamposForm2()
-                '  ConectarBD()
-
-                '  MostrarRegistros(inc)
-
-            End If
-
-        Else
-            MsgBox("Hay que introducir una fecha de baja", CType(0, MsgBoxStyle), "Atención!!!")
-            TBbaja.Focus()
-
-        End If
-
+        accion = "modifica"
 
 
     End Sub
 
+    Private Sub Bbaja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BBaja.Click
 
-    Private Sub BGuardar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BGuardar.Click
+        'muetro botones Aceptar y Cancelar
+        mostrarAceptar()
 
-        Dim respuesta As MsgBoxResult
+        'Deshabilito botones de Altas y Bajas y modificaciones
+        deshabilitarAltaBajaModi()
+
+        accion = "baja"
+
+        'Habilita campo Fecha de Baja y su boton asociado
+        habilitarFechaBaja()
+
+    End Sub
+
+    Private Sub BAlta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BAlta.Click
+
+        'muetro botones Aceptar y Cancelar
+        mostrarAceptar()
+
+        'Deshabilito botones de Altas y Bajas y modificaciones
+        deshabilitarAltaBajaModi()
+
+        'Deshabilito los botones de recorrer los registros
+        deshabilitarAlanteAtras()
+
+        'Habilito los campos de texto
+        habilitarCamposTexto()
+
+        accion = "alta"
+
+        limpiarCamposForm2()
+        Textcod.Text = CStr(MaxRows + 1)
+        Textnreg.Text = CStr(MaxRows + 1)
+
+    End Sub
+
+    Private Sub BCancelar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+
+        accion = "nada"
+
+    End Sub
+
+    Private Sub BAceptar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BAceptar.Click
+
+        Select Case accion
+            Case "modifica"
+                modificarDatos()
+            Case "alta"
+                DarDeAltaDatos()
+            Case "baja"
+                DarDeBajaDatos()
+        End Select
+
+        'Habilito los botones de Alta, bajas y Modificaciones
+        habilitarAltaBajaModi()
+
+    End Sub
+
+    Private Sub modificarDatos()
+
         Dim cb As New OleDb.OleDbCommandBuilder(da) ' Es obligatorio para luego usar da.Update(ds, "comunidad")
+
+        Try
+            ds.Tables("comunidad").Rows(inc).Item("codcomunidad") = CInt(Textcod.Text)
+            ds.Tables("comunidad").Rows(inc).Item("calle") = Textcalle.Text
+            ds.Tables("comunidad").Rows(inc).Item("numero") = CInt(Textnum.Text)
+            ds.Tables("comunidad").Rows(inc).Item("nplantas") = CInt(Textnplantas.Text)
+            ds.Tables("comunidad").Rows(inc).Item("vecinosplanta") = CInt(Textvplanta.Text)
+            ds.Tables("comunidad").Rows(inc).Item("totalvecinos") = CInt(Texttvecinos.Text)
+            ds.Tables("comunidad").Rows(inc).Item("falta") = CDate(TBalta.Text)
+
+            da.Update(ds, "comunidad")
+
+            MsgBox("Datos actualizados correctamente?", CType(0, MsgBoxStyle), "Aviso")
+
+        Catch ex As Exception
+            MsgBox("Error Modificación: " & ex.Message)
+        End Try
+
+    End Sub
+
+    Private Sub DarDeAltaDatos()
+
+        Dim cb As New OleDb.OleDbCommandBuilder(da)
 
         Dim dsNewRow As DataRow
 
-        Dim BGuardarTexto As String
+        dsNewRow = ds.Tables("comunidad").NewRow
 
-        BGuardarTexto = BGuardar.Text
+        If Textcod.Text = "" Or Textcalle.Text = "" Or Textnum.Text = "" Or Textnplantas.Text = "" Or Textvplanta.Text = "" Or Texttvecinos.Text = "" Or TBalta.Text = "" Then
 
-        Select Case BGuardarTexto
-            Case "Guardar"  'Despues de ejecutar el botón Nueva Comunidad, se pone en  Guardar para dar de alta el registro introducido. 
-                dsNewRow = ds.Tables("comunidad").NewRow
+            MsgBox("Debe rellenar todos los campos. No puede haber un campo vacio", CType(0, MsgBoxStyle), "Atención")
 
-                'No se puede guardar hasta que no se completen todos los campos 
-                If Textcod.Text = "" Or Textcalle.Text = "" Or Textnum.Text = "" Or Textnplantas.Text = "" Or Textvplanta.Text = "" Or Texttvecinos.Text = "" Then
-                    MsgBox("Hay que rellenar todos los campos", CType(0, MsgBoxStyle), "Atención!!!") ' ventana de ok
-                Else
-                    Try
-                        dsNewRow.Item("codcomunidad") = CInt(Textcod.Text)
-                        dsNewRow.Item("calle") = Textcalle.Text
-                        dsNewRow.Item("numero") = CInt(Textnum.Text)
-                        dsNewRow.Item("nplantas") = CInt(Textnplantas.Text)
-                        dsNewRow.Item("vecinosplanta") = CInt(Textvplanta.Text)
-                        dsNewRow.Item("totalvecinos") = CInt(Texttvecinos.Text)
-                        dsNewRow.Item("falta") = CDate(TBalta.Text)
-                        'dsNewRow.Item("fbaja") = CDate(TBbaja.Text)
+        Else
 
-                        respuesta = MsgBox("Se guardará el registro (y cambios efectuados). ¿Desea continuar?", CType(4, MsgBoxStyle), "Cuidado!!!") 'ventada de si/no
+            Try
+                dsNewRow.Item("codcomunidad") = CInt(Textcod.Text)
+                dsNewRow.Item("calle") = Textcalle.Text
+                dsNewRow.Item("numero") = CInt(Textnum.Text)
+                dsNewRow.Item("nplantas") = CInt(Textnplantas.Text)
+                dsNewRow.Item("vecinosplanta") = CInt(Textvplanta.Text)
+                dsNewRow.Item("totalvecinos") = CInt(Texttvecinos.Text)
+                dsNewRow.Item("falta") = CDate(TBalta.Text)
+                'dsNewRow.Item("fbaja") = CDate(TBbaja.Text)
 
-                        If respuesta = MsgBoxResult.Yes Then  'si la respuesta es si
+                ds.Tables("comunidad").Rows.Add(dsNewRow)
+                da.Update(ds, "comunidad")
 
-                            'Se añade la nueva fila creada al dataset
-                            ds.Tables("comunidad").Rows.Add(dsNewRow)
+                MaxRows = ds.Tables("comunidad").Rows.Count
 
-                            'Se actualiza el dataset
-                            da.Update(ds, "comunidad")
+                inc = MaxRows - 1
+                Textnreg.Text = CStr(inc + 1) & " / " & CStr(MaxRows)
 
-                            'Se calcula el nº de filas que tiene ahora el dataset
-                            MaxRows = ds.Tables("comunidad").Rows.Count
+                MsgBox("Nuevo registro añadido a la base de datos")
 
-                            MostrarRegistros(inc)
+            Catch ex As Exception
+                MsgBox("Error Alta: " & ex.Message)
+            End Try
 
-                        Else
+            'Variable accion a nada para volver a ser utilizada
+            accion = "nada"
 
-                            MostrarRegistros(inc)
+            'ocultos botones Aceptar y Cancelar
+            ocultarAceptar()
 
-                        End If
+            'Habilito los botones de recorrer los registros
+            habilitarAlanteAtras()
 
-                        BNuevo.Enabled = True
-                        BBaja.Enabled = True
+            'Deshabilito los campos de texto
+            deshabilitarCamposTexto()
 
-                    Catch ex As Exception
-                        MsgBox("Error: " & ex.Message)
-                    End Try
-
-                    nuevoReg = False
-
-                End If
-            Case "Guardar Modificaciones"  ' Valor Guardar Modificaciones cuando se cambia el valor de algún campo. No se ejecuta los botones de Alta ni de Baja
-
-            Case "Aceptar"  'Despues de ejecutar el botón Baja Comunidad, se pone a Aceptar para borrar el registro en curso. 
-
-            Case Else
-                'mmm
-        End Select
-
-        BGuardar.Text = "Guardar Modificaciones"
+        End If
 
     End Sub
 
+    Private Sub DarDeBajaDatos()
 
-    Private Sub BNuevo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BNuevo.Click
+        ' Dar de baja significa poner una fecha de baja y no mostrar los registros con fecha de baja
 
-        nuevoReg = True
+        Dim cb As New OleDb.OleDbCommandBuilder(da) ' Es obligatorio para luego usar da.Update(ds, "comunidad")
 
+        If TBbaja.Text = "" Then
 
-        limpiarCamposForm2()
-        TBalta.Text = DateTime.Now.ToString("dd/MM/yyyy")  'calculo la fecha del sistema
+            MsgBox("Hay que introducir una fecha de baja", CType(0, MsgBoxStyle), "Atención")
+            TBbaja.Focus()
 
-        TBalta.Enabled = False
-        TBbaja.Enabled = False
-        BGuardar.Text = "Guardar"
+        Else
+            'Actualizo en ese registro la fecha de baja
+            ds.Tables("comunidad").Rows(inc).Item("fbaja") = CDate(TBbaja.Text)
 
-        inc = MaxRows
+            da.Update(ds, "comunidad")
 
-        Textnreg.Text = CStr(inc + 1) & " / " & CStr(MaxRows + 1)
+            MsgBox("Registro Borrado de la base de datos")
 
-        Textcod.Text = CStr(CInt(ds.Tables("comunidad").Rows(MaxRows - 1).Item("codcomunidad").ToString) + 1)
-        Textcalle.Focus()
+            accion = "nada"
+            MostrarSituacionInicial()
+            ds.Clear()
 
-        BNuevo.Enabled = False
-        BBaja.Enabled = False
+            ConectarBD()
+
+        End If
 
     End Sub
 
@@ -210,7 +248,7 @@ Public Class FAltaCV
 
             MostrarRegistros(inc)
         End If
-        BNuevo.Enabled = True
+        BAlta.Enabled = True
         BBaja.Enabled = True
 
     End Sub
@@ -243,7 +281,7 @@ Public Class FAltaCV
             MostrarRegistros(inc)
         End If
 
-        BNuevo.Enabled = True
+        BAlta.Enabled = True
         BBaja.Enabled = True
 
     End Sub
@@ -273,7 +311,6 @@ Public Class FAltaCV
             TBbaja.Text = CStr(CDate(ds.Tables("comunidad").Rows(p1).Item("fbaja").ToString))
         End If
 
-        BGuardar.Text = "Guardar Modificaciones"
     End Sub
 
     Private Sub limpiarCamposForm2()
@@ -285,6 +322,7 @@ Public Class FAltaCV
         Textnplantas.Text = ""
         Textvplanta.Text = ""
         TBalta.Text = ""
+        TBbaja.Text = ""
         Textnreg.Text = "0"
 
     End Sub
@@ -366,22 +404,26 @@ Public Class FAltaCV
 
     End Sub
 
-
     Private Sub PictureBox1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox1.Click
 
-        If CalendarioMes1.Visible = True Then
-            CalendarioMes1.Visible = False
+        botCalendario = 1
+
+        If CalendarioMes.Visible = True Then
+            CalendarioMes.Visible = False
         Else
-            CalendarioMes1.Visible = True
+            CalendarioMes.Visible = True
         End If
 
     End Sub
+
     Private Sub PictureBox2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PictureBox2.Click
 
-        If CalendarioMes2.Visible = True Then
-            CalendarioMes2.Visible = False
+        botCalendario = 2
+
+        If CalendarioMes.Visible = True Then
+            CalendarioMes.Visible = False
         Else
-            CalendarioMes2.Visible = True
+            CalendarioMes.Visible = True
         End If
 
     End Sub
@@ -401,37 +443,140 @@ Public Class FAltaCV
         PictureBox2.Cursor = Cursors.Arrow
     End Sub
 
-    Private Sub CalendarioMes1_DateChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DateRangeEventArgs) Handles CalendarioMes1.DateChanged
-        TBalta.Text = CStr(CDate(CalendarioMes1.SelectionRange.Start))
+    Private Sub CalendarioMes_DateChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DateRangeEventArgs) Handles CalendarioMes.DateChanged
+
+        If botCalendario = 1 Then
+            TBalta.Text = CStr(CDate(CalendarioMes.SelectionRange.Start))
+        Else
+            TBbaja.Text = CStr(CDate(CalendarioMes.SelectionRange.Start))
+        End If
+
     End Sub
 
-    Private Sub CalendarioMes1_DateSelected(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DateRangeEventArgs) Handles CalendarioMes1.DateSelected
-        CalendarioMes1.Visible = False
+    Private Sub CalendarioMes_MouseEnter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CalendarioMes.MouseEnter
+        CalendarioMes.Visible = True
+        CalendarioMes.Cursor = Cursors.Hand
     End Sub
 
-    Private Sub CalendarioMes1_MouseEnter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CalendarioMes1.MouseEnter
-        CalendarioMes1.Visible = True
+    Private Sub CalendarioMes_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CalendarioMes.MouseLeave
+        CalendarioMes.Visible = False
+        CalendarioMes.Cursor = Cursors.Arrow
     End Sub
 
-    Private Sub CalendarioMes1_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CalendarioMes1.MouseLeave
-        CalendarioMes1.Visible = False
+    Private Sub MostrarSituacionInicial()
+
+        'botones Cancelar y Aceptar  no visibles y no habilitados
+        ocultarAceptar()
+
+        'Deshabilita los campos de texto del formulario
+        deshabilitarCamposTexto()
+
+        Textnreg.Enabled = False  'muestra el nº de registro que se esta mostrando
+
+        'Botones que se habilitan
+        Binicio.Enabled = True
+        Batras.Enabled = True
+        Badelante.Enabled = True
+        Bfin.Enabled = True
+
+        'botones Alta, bajas, Modificaciones
+        BAlta.Enabled = True
+        BBaja.Enabled = True
+        BModificaciones.Enabled = True
+
     End Sub
 
-    Private Sub CalendarioMes2_DateChanged(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DateRangeEventArgs) Handles CalendarioMes2.DateChanged
-        TBbaja.Text = CStr(CDate(CalendarioMes2.SelectionRange.Start))
+    Private Sub deshabilitarCamposTexto()
+        'Campos que se habilitan
+        Textcod.Enabled = False
+        Textcalle.Enabled = False
+        Textnum.Enabled = False
+        Textnplantas.Enabled = False
+        Textvplanta.Enabled = False
+        Texttvecinos.Enabled = False
+        TBalta.Enabled = False
+        PictureBox1.Enabled = False
+        TBbaja.Enabled = False
+        PictureBox2.Enabled = False
     End Sub
 
-    Private Sub CalendarioMes2_DateSelected(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DateRangeEventArgs) Handles CalendarioMes2.DateSelected
-        CalendarioMes2.Visible = False
+    Private Sub habilitarCamposTexto()
+        'Campos que se habilitan
+        Textcod.Enabled = False
+        Textcalle.Enabled = True
+        Textnum.Enabled = True
+        Textnplantas.Enabled = True
+        Textvplanta.Enabled = True
+        Texttvecinos.Enabled = True
+        TBalta.Enabled = True
+        PictureBox1.Enabled = True
+        TBbaja.Enabled = False
+        PictureBox2.Enabled = False
+
+        ' El foco lo pongo en el campo calle
+        Textcalle.Focus()
+
     End Sub
 
-    Private Sub CalendarioMes2_MouseEnter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CalendarioMes2.MouseEnter
-        CalendarioMes2.Visible = True
+    Private Sub deshabilitarAltaBajaModi()
+
+        'Deshabilito botones de Altas y Bajas y modificaciones
+        BAlta.Enabled = False
+        BBaja.Enabled = False
+        BModificaciones.Enabled = False
     End Sub
 
-    Private Sub CalendarioMes2_MouseLeave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CalendarioMes2.MouseLeave
-        CalendarioMes2.Visible = False
+    Private Sub habilitarAltaBajaModi()
+
+        'Deshabilito botones de Altas y Bajas y modificaciones
+        BAlta.Enabled = True
+        BBaja.Enabled = True
+        BModificaciones.Enabled = True
     End Sub
 
+    Private Sub mostrarAceptar()
+        'botones Cancelar y Aceptar  no visibles y no habilitados
+        BAceptar.Visible = True
+        BAceptar.Enabled = True
 
+    End Sub
+
+    Private Sub ocultarAceptar()
+        'botones Cancelar y Aceptar  no visibles y no habilitados
+        BAceptar.Visible = False
+        BAceptar.Enabled = False
+
+    End Sub
+
+    Private Sub habilitarAlanteAtras()
+        'Se deshabilitan los botones para moverse entre los registros
+        Binicio.Enabled = True
+        Batras.Enabled = True
+        Badelante.Enabled = True
+        Bfin.Enabled = True
+
+    End Sub
+
+    Private Sub deshabilitarAlanteAtras()
+        'Se deshabilitan los botones para moverse entre los registros
+        Binicio.Enabled = False
+        Batras.Enabled = False
+        Badelante.Enabled = False
+        Bfin.Enabled = False
+
+    End Sub
+
+    Private Sub habilitarFechaBaja()
+        'Habilita campo de fecha de bajo y boton asociado
+        TBbaja.Enabled = True
+        PictureBox2.Enabled = True
+
+    End Sub
+
+    Private Sub deshabilitarFechaBaja()
+        'Habilita campo de fecha de bajo y boton asociado
+        TBbaja.Enabled = True
+        PictureBox2.Enabled = True
+
+    End Sub
 End Class

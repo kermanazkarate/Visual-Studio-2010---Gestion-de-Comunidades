@@ -29,11 +29,10 @@ Partial Class FAltaCV
         Me.Batras = New System.Windows.Forms.Button()
         Me.Badelante = New System.Windows.Forms.Button()
         Me.Textnreg = New System.Windows.Forms.TextBox()
-        Me.BNuevo = New System.Windows.Forms.Button()
+        Me.BAlta = New System.Windows.Forms.Button()
         Me.BBaja = New System.Windows.Forms.Button()
-        Me.BGuardar = New System.Windows.Forms.Button()
-        Me.CalendarioMes1 = New System.Windows.Forms.MonthCalendar()
-        Me.CalendarioMes2 = New System.Windows.Forms.MonthCalendar()
+        Me.BModificaciones = New System.Windows.Forms.Button()
+        Me.CalendarioMes = New System.Windows.Forms.MonthCalendar()
         Me.Textcod = New System.Windows.Forms.TextBox()
         Me.Textnum = New System.Windows.Forms.TextBox()
         Me.Texttvecinos = New System.Windows.Forms.TextBox()
@@ -53,6 +52,7 @@ Partial Class FAltaCV
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.BAceptar = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -114,14 +114,14 @@ Partial Class FAltaCV
         Me.Textnreg.TabIndex = 19
         Me.Textnreg.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'BNuevo
+        'BAlta
         '
-        Me.BNuevo.Location = New System.Drawing.Point(148, 499)
-        Me.BNuevo.Name = "BNuevo"
-        Me.BNuevo.Size = New System.Drawing.Size(146, 27)
-        Me.BNuevo.TabIndex = 8
-        Me.BNuevo.Text = "Alta - Nueva Comunidad"
-        Me.BNuevo.UseVisualStyleBackColor = True
+        Me.BAlta.Location = New System.Drawing.Point(148, 499)
+        Me.BAlta.Name = "BAlta"
+        Me.BAlta.Size = New System.Drawing.Size(146, 27)
+        Me.BAlta.TabIndex = 8
+        Me.BAlta.Text = "Alta - Nueva Comunidad"
+        Me.BAlta.UseVisualStyleBackColor = True
         '
         'BBaja
         '
@@ -132,28 +132,21 @@ Partial Class FAltaCV
         Me.BBaja.Text = "Baja - Comunidad"
         Me.BBaja.UseVisualStyleBackColor = True
         '
-        'BGuardar
+        'BModificaciones
         '
-        Me.BGuardar.Location = New System.Drawing.Point(508, 499)
-        Me.BGuardar.Name = "BGuardar"
-        Me.BGuardar.Size = New System.Drawing.Size(145, 27)
-        Me.BGuardar.TabIndex = 10
-        Me.BGuardar.Text = "Guardar Modificaciones"
-        Me.BGuardar.UseVisualStyleBackColor = True
+        Me.BModificaciones.Location = New System.Drawing.Point(508, 499)
+        Me.BModificaciones.Name = "BModificaciones"
+        Me.BModificaciones.Size = New System.Drawing.Size(145, 27)
+        Me.BModificaciones.TabIndex = 10
+        Me.BModificaciones.Text = "Modificaciones Comunidad"
+        Me.BModificaciones.UseVisualStyleBackColor = True
         '
-        'CalendarioMes1
+        'CalendarioMes
         '
-        Me.CalendarioMes1.Location = New System.Drawing.Point(329, 182)
-        Me.CalendarioMes1.Name = "CalendarioMes1"
-        Me.CalendarioMes1.TabIndex = 24
-        Me.CalendarioMes1.Visible = False
-        '
-        'CalendarioMes2
-        '
-        Me.CalendarioMes2.Location = New System.Drawing.Point(329, 182)
-        Me.CalendarioMes2.Name = "CalendarioMes2"
-        Me.CalendarioMes2.TabIndex = 26
-        Me.CalendarioMes2.Visible = False
+        Me.CalendarioMes.Location = New System.Drawing.Point(330, 184)
+        Me.CalendarioMes.Name = "CalendarioMes"
+        Me.CalendarioMes.TabIndex = 24
+        Me.CalendarioMes.Visible = False
         '
         'Textcod
         '
@@ -166,6 +159,7 @@ Partial Class FAltaCV
         '
         'Textnum
         '
+        Me.Textnum.BackColor = System.Drawing.Color.White
         Me.Textnum.Location = New System.Drawing.Point(435, 92)
         Me.Textnum.Name = "Textnum"
         Me.Textnum.Size = New System.Drawing.Size(44, 20)
@@ -173,6 +167,7 @@ Partial Class FAltaCV
         '
         'Texttvecinos
         '
+        Me.Texttvecinos.BackColor = System.Drawing.Color.White
         Me.Texttvecinos.Location = New System.Drawing.Point(420, 157)
         Me.Texttvecinos.Name = "Texttvecinos"
         Me.Texttvecinos.Size = New System.Drawing.Size(59, 20)
@@ -180,6 +175,7 @@ Partial Class FAltaCV
         '
         'Textcalle
         '
+        Me.Textcalle.BackColor = System.Drawing.Color.White
         Me.Textcalle.Location = New System.Drawing.Point(55, 93)
         Me.Textcalle.Name = "Textcalle"
         Me.Textcalle.Size = New System.Drawing.Size(318, 20)
@@ -196,6 +192,7 @@ Partial Class FAltaCV
         '
         'Textnplantas
         '
+        Me.Textnplantas.BackColor = System.Drawing.Color.White
         Me.Textnplantas.Location = New System.Drawing.Point(82, 156)
         Me.Textnplantas.Name = "Textnplantas"
         Me.Textnplantas.Size = New System.Drawing.Size(56, 20)
@@ -212,6 +209,7 @@ Partial Class FAltaCV
         '
         'Textvplanta
         '
+        Me.Textvplanta.BackColor = System.Drawing.Color.White
         Me.Textvplanta.Location = New System.Drawing.Point(266, 155)
         Me.Textvplanta.Name = "Textvplanta"
         Me.Textvplanta.Size = New System.Drawing.Size(44, 20)
@@ -228,6 +226,7 @@ Partial Class FAltaCV
         '
         'TBalta
         '
+        Me.TBalta.BackColor = System.Drawing.Color.White
         Me.TBalta.Location = New System.Drawing.Point(232, 227)
         Me.TBalta.Name = "TBalta"
         Me.TBalta.Size = New System.Drawing.Size(74, 20)
@@ -262,6 +261,7 @@ Partial Class FAltaCV
         '
         'TBbaja
         '
+        Me.TBbaja.BackColor = System.Drawing.Color.White
         Me.TBbaja.Location = New System.Drawing.Point(232, 285)
         Me.TBbaja.Name = "TBbaja"
         Me.TBbaja.Size = New System.Drawing.Size(74, 20)
@@ -310,9 +310,8 @@ Partial Class FAltaCV
         Me.GroupBox1.Controls.Add(Me.PictureBox2)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.PictureBox1)
-        Me.GroupBox1.Controls.Add(Me.CalendarioMes1)
+        Me.GroupBox1.Controls.Add(Me.CalendarioMes)
         Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.CalendarioMes2)
         Me.GroupBox1.Controls.Add(Me.TBbaja)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label8)
@@ -333,16 +332,26 @@ Partial Class FAltaCV
         Me.GroupBox1.TabIndex = 27
         Me.GroupBox1.TabStop = False
         '
+        'BAceptar
+        '
+        Me.BAceptar.Location = New System.Drawing.Point(695, 373)
+        Me.BAceptar.Name = "BAceptar"
+        Me.BAceptar.Size = New System.Drawing.Size(76, 29)
+        Me.BAceptar.TabIndex = 29
+        Me.BAceptar.Text = "Aceptar"
+        Me.BAceptar.UseVisualStyleBackColor = True
+        '
         'FAltaCV
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(814, 643)
+        Me.Controls.Add(Me.BAceptar)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.BGuardar)
+        Me.Controls.Add(Me.BModificaciones)
         Me.Controls.Add(Me.BBaja)
-        Me.Controls.Add(Me.BNuevo)
+        Me.Controls.Add(Me.BAlta)
         Me.Controls.Add(Me.Textnreg)
         Me.Controls.Add(Me.Badelante)
         Me.Controls.Add(Me.Batras)
@@ -366,11 +375,10 @@ Partial Class FAltaCV
     Friend WithEvents Batras As System.Windows.Forms.Button
     Friend WithEvents Badelante As System.Windows.Forms.Button
     Friend WithEvents Textnreg As System.Windows.Forms.TextBox
-    Friend WithEvents BNuevo As System.Windows.Forms.Button
+    Friend WithEvents BAlta As System.Windows.Forms.Button
     Friend WithEvents BBaja As System.Windows.Forms.Button
-    Friend WithEvents BGuardar As System.Windows.Forms.Button
-    Friend WithEvents CalendarioMes1 As System.Windows.Forms.MonthCalendar
-    Friend WithEvents CalendarioMes2 As System.Windows.Forms.MonthCalendar
+    Friend WithEvents BModificaciones As System.Windows.Forms.Button
+    Friend WithEvents CalendarioMes As System.Windows.Forms.MonthCalendar
     Friend WithEvents Textcod As System.Windows.Forms.TextBox
     Friend WithEvents Textnum As System.Windows.Forms.TextBox
     Friend WithEvents Texttvecinos As System.Windows.Forms.TextBox
@@ -390,4 +398,5 @@ Partial Class FAltaCV
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents BAceptar As System.Windows.Forms.Button
 End Class

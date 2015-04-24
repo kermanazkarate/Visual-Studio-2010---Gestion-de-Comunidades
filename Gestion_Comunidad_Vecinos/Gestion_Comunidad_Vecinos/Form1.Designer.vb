@@ -69,16 +69,16 @@ Partial Class FInicio
         Me.GroupBox1.Controls.Add(Me.BEntrar)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.CBComunidad)
-        Me.GroupBox1.Location = New System.Drawing.Point(81, 245)
+        Me.GroupBox1.Location = New System.Drawing.Point(66, 245)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(599, 87)
+        Me.GroupBox1.Size = New System.Drawing.Size(661, 87)
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Gestión de una Comunidad de Vecinos"
         '
         'BEntrar
         '
-        Me.BEntrar.Location = New System.Drawing.Point(475, 33)
+        Me.BEntrar.Location = New System.Drawing.Point(512, 33)
         Me.BEntrar.Name = "BEntrar"
         Me.BEntrar.Size = New System.Drawing.Size(101, 21)
         Me.BEntrar.TabIndex = 2
@@ -88,16 +88,16 @@ Partial Class FInicio
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(25, 36)
+        Me.Label1.Location = New System.Drawing.Point(33, 36)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(178, 13)
+        Me.Label1.Size = New System.Drawing.Size(199, 13)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Seleccionar Comunidad de Vecinos:"
+        Me.Label1.Text = "Seleccionar una Comunidad de Vecinos:"
         '
         'CBComunidad
         '
         Me.CBComunidad.FormattingEnabled = True
-        Me.CBComunidad.Location = New System.Drawing.Point(207, 33)
+        Me.CBComunidad.Location = New System.Drawing.Point(244, 33)
         Me.CBComunidad.Name = "CBComunidad"
         Me.CBComunidad.Size = New System.Drawing.Size(255, 21)
         Me.CBComunidad.TabIndex = 0
@@ -106,9 +106,9 @@ Partial Class FInicio
         '
         Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Controls.Add(Me.BABMCV)
-        Me.GroupBox2.Location = New System.Drawing.Point(81, 105)
+        Me.GroupBox2.Location = New System.Drawing.Point(66, 105)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(599, 87)
+        Me.GroupBox2.Size = New System.Drawing.Size(661, 87)
         Me.GroupBox2.TabIndex = 6
         Me.GroupBox2.TabStop = False
         '

@@ -35,25 +35,41 @@ Module Funciones
     Public MaxRows As Integer     ' Variable que indica en nº maximo de registros o lineas
     Public inc As Integer         ' variable que indica en que registro estamos
 
+    Public ultimoNreg As Integer
+
     'Conecto con la base de datos y saco todos los valores de una tabla
     Public Sub ConectarBD()
 
-        'da = Nothing
-        'ds = Nothing
-
         Try
-
-            'Realizamos la conexión, le decimos el proveedor y donde esta la BD
-            'dbProvider = "Provider=Microsoft.Jet.OLEDB.4.0;"
-            'dbSource = "Data Source=Comunidad_Vecinos.mdb"
+            'conecto con la base de datos
             con.ConnectionString = dbProvider & dbSource
 
+            'abro la base de datos
+            con.Open()
+
+            sql = "SELECT max(codcomunidad) FROM comunidad GROUP BY codcomunidad "
+
+            da = New OleDb.OleDbDataAdapter(sql, con)
+
+            'Llenamos el DataSet con la informacion de la tabla comunidad
+            da.Fill(ds, "comunidad")  'ds es el DataSet. da es TableAdapter
+            'cierro la conexión con la base de datos
+            con.Close()
+
+            'recojo el nro de filas actuales en la tabla
+            MaxRows = ds.Tables("comunidad").Rows.Count
+            MsgBox("1º MaxRows: " & MaxRows)
+
+            'guardo el valor del codcomunidad mas alto que hay en la base de datos
+            ultimoNreg = CInt(ds.Tables("comunidad").Rows(MaxRows - 1).Item("codcomunidad"))
+            ds.Clear()
+
+            'conecto y abro de nuevo la base de datos
+            con.ConnectionString = dbProvider & dbSource
             con.Open()
 
             'Solo muestros las comunidades que estan activas y no se han dado de baja
             sql = "SELECT * FROM comunidad WHERE fbaja is null  ORDER BY codcomunidad"
-
-            ' MsgBox("sql: " & sql)
 
             da = New OleDb.OleDbDataAdapter(sql, con)
 
@@ -67,6 +83,9 @@ Module Funciones
 
             'preparo el índice que indica en que Posición estoy
             inc = 0  ' Los registros de la base de datos empiezan en el registro 0
+
+            MsgBox("2º MaxRows: " & MaxRows)
+
         Catch ex As Exception
             MsgBox("Excepción: " & ex.Message)
         End Try
