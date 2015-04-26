@@ -77,6 +77,8 @@ Public Class FAltaCV
         'Habilita campo Fecha de Baja y su boton asociado
         habilitarFechaBaja()
 
+        TBbaja.Focus()
+
     End Sub
 
     Private Sub BAlta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BAlta.Click
@@ -113,7 +115,7 @@ Public Class FAltaCV
 
         Select Case accion
             Case "modifica"
-                'habilito los campos de texto
+                'Deshabilito los campos de texto
                 deshabilitarCamposTexto()
 
             Case "alta"
@@ -126,7 +128,7 @@ Public Class FAltaCV
                     MostrarRegistros(inc)
                 Else
 
-                    'Deshabilito los botones de recorrer los registros
+                    'Habilito los botones de recorrer los registros
                     habilitarAlanteAtras()
 
                     MsgBox("No hay ninguna Comunidad de Vecinos dados de Alta en la Base de Datos", CType(0, MsgBoxStyle), "Atención!!!") 'mensaje con ventana solo ok
@@ -134,7 +136,12 @@ Public Class FAltaCV
                 End If
 
             Case "baja"
-                MsgBox("Se cancela Baja de registro")
+                TBbaja.Text = ""
+                'Deshabilito los campos de texto
+                deshabilitarCamposTexto()
+
+                'Habilito los botones de recorrer los registros
+                habilitarAlanteAtras()
         End Select
 
         'botones Cancelar y Aceptar  no visibles y no habilitados
@@ -500,6 +507,16 @@ Public Class FAltaCV
 
     End Sub
 
+    Private Sub CalendarioMes_DateSelected(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DateRangeEventArgs) Handles CalendarioMes.DateSelected
+        If botCalendario = 1 Then
+            TBalta.Text = CStr(CDate(CalendarioMes.SelectionRange.Start))
+        Else
+            TBbaja.Text = CStr(CDate(CalendarioMes.SelectionRange.Start))
+        End If
+        CalendarioMes.Visible = False
+        CalendarioMes.Cursor = Cursors.Arrow
+    End Sub
+
     Private Sub CalendarioMes_MouseEnter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CalendarioMes.MouseEnter
         CalendarioMes.Visible = True
         CalendarioMes.Cursor = Cursors.Hand
@@ -627,6 +644,5 @@ Public Class FAltaCV
         PictureBox2.Enabled = True
 
     End Sub
-
 
 End Class
