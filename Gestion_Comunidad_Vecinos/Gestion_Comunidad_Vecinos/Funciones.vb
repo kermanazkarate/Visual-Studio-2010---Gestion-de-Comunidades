@@ -35,35 +35,14 @@ Module Funciones
     Public MaxRows As Integer     ' Variable que indica en nº maximo de registros o lineas
     Public inc As Integer         ' variable que indica en que registro estamos
 
-    Public ultimoNreg As Integer
+    Public ultimoNreg As Integer   'variable que guarda el valor mayor del campo codcomundad de la BD
 
     'Conecto con la base de datos y saco todos los valores de una tabla
     Public Sub ConectarBD()
 
+        Dim sql As String
+
         Try
-            'conecto con la base de datos
-            con.ConnectionString = dbProvider & dbSource
-
-            'abro la base de datos
-            con.Open()
-
-            sql = "SELECT max(codcomunidad) FROM comunidad GROUP BY codcomunidad "
-
-            da = New OleDb.OleDbDataAdapter(sql, con)
-
-            'Llenamos el DataSet con la informacion de la tabla comunidad
-            da.Fill(ds, "comunidad")  'ds es el DataSet. da es TableAdapter
-            'cierro la conexión con la base de datos
-            con.Close()
-
-            'recojo el nro de filas actuales en la tabla
-            MaxRows = ds.Tables("comunidad").Rows.Count
-            MsgBox("1º MaxRows: " & MaxRows)
-
-            'guardo el valor del codcomunidad mas alto que hay en la base de datos
-            ultimoNreg = CInt(ds.Tables("comunidad").Rows(MaxRows - 1).Item("codcomunidad"))
-            ds.Clear()
-
             'conecto y abro de nuevo la base de datos
             con.ConnectionString = dbProvider & dbSource
             con.Open()
@@ -79,12 +58,9 @@ Module Funciones
 
             'recojo el nro de filas actuales en la tabla
             MaxRows = ds.Tables("comunidad").Rows.Count
-            ' MsgBox("Nº de Registros: " & MaxRows)
 
             'preparo el índice que indica en que Posición estoy
             inc = 0  ' Los registros de la base de datos empiezan en el registro 0
-
-            MsgBox("2º MaxRows: " & MaxRows)
 
         Catch ex As Exception
             MsgBox("Excepción: " & ex.Message)
@@ -93,29 +69,41 @@ Module Funciones
         'MostrarRegistros(inc)
     End Sub
 
-    ' Private Sub BorrarRegistro(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BBorrar.Click
+    'Me conecto a la base de datos y busco el último codcomunidad guardado
+    Public Sub BuscarUltimoCdComunidad()
 
-    'Dim respuesta As MsgBoxResult
-    ' Dim cb As New OleDb.OleDbCommandBuilder(da)
+        Dim sql As String
 
-    ' respuesta = MsgBox("Borrado de registro. ¿Desea continuar?", CType(4, MsgBoxStyle), "Cuidado!!!") ' mensaje con si/no
+        Try
+            'conecto con la base de datos
+            con.ConnectionString = dbProvider & dbSource
 
-    ' If respuesta = MsgBoxResult.Yes Then
+            'abro la base de datos
+            con.Open()
 
-    'ds.Tables("comunidad").Rows(inc).Delete()
+            sql = "SELECT * FROM comunidad"
 
-    ' da.Update(ds, "comunidad")
+            da = New OleDb.OleDbDataAdapter(sql, con)
 
-    ' MsgBox("Registro Borrado de la base de datos")
+            'Llenamos el DataSet con la informacion de la tabla comunidad
+            da.Fill(ds, "comunidad")  'ds es el DataSet. da es TableAdapter
+            'cierro la conexión con la base de datos
+            con.Close()
 
-    ' MaxRows = MaxRows - 1
-    ' inc = 0
+            'recojo el nro de filas actuales en la tabla
+            MaxRows = ds.Tables("comunidad").Rows.Count
 
-    ' MostrarRegistros(inc)
+            'guardo el valor del codcomunidad mas alto que hay en la base de datos
+            ultimoNreg = CInt(ds.Tables("comunidad").Rows(MaxRows - 1).Item("codcomunidad"))
 
-    ' End If
+            ds.Clear()
 
-    ' End Sub
+        Catch ex As Exception
+            MsgBox("Excepción: " & ex.Message)
+        End Try
+
+        'MostrarRegistros(inc)
+    End Sub
 
     'indica si un caracter es solo de tipo número
     Public Function CaracterSoloNumeros(ByVal caracter As Char) As Boolean

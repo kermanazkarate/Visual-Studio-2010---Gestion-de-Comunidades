@@ -53,6 +53,7 @@ Partial Class FAltaCV
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.BAceptar = New System.Windows.Forms.Button()
+        Me.BCancelar = New System.Windows.Forms.Button()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -341,12 +342,22 @@ Partial Class FAltaCV
         Me.BAceptar.Text = "Aceptar"
         Me.BAceptar.UseVisualStyleBackColor = True
         '
+        'BCancelar
+        '
+        Me.BCancelar.Location = New System.Drawing.Point(695, 321)
+        Me.BCancelar.Name = "BCancelar"
+        Me.BCancelar.Size = New System.Drawing.Size(76, 29)
+        Me.BCancelar.TabIndex = 30
+        Me.BCancelar.Text = "Cancelar"
+        Me.BCancelar.UseVisualStyleBackColor = True
+        '
         'FAltaCV
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(814, 643)
+        Me.Controls.Add(Me.BCancelar)
         Me.Controls.Add(Me.BAceptar)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.BModificaciones)
@@ -399,4 +410,5 @@ Partial Class FAltaCV
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents BAceptar As System.Windows.Forms.Button
+    Friend WithEvents BCancelar As System.Windows.Forms.Button
 End Class

@@ -4,6 +4,8 @@ Public Class FAltaCV
     Public nuevoReg As Boolean = False  'variable que indica si estamos en un nuevo registro en la tabla comunidad
     Public accion As String = "nada"  'esta variable tiene 4 valores: nada, alta, baja, modifica
     Public botCalendario As Integer = 0  'este variable controla que boton del calendario se pulsa
+    Public estoyNreg As Integer = 0    'variable que indica cuando doy de alta, desde que nº de registro salto, para luego poder volver a es registro si cancelo
+
 
 
     Private Sub BVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BVolver.Click
@@ -14,22 +16,19 @@ Public Class FAltaCV
 
     Private Sub FAltaCV_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        MsgBox("Ultimo valor mas alto" & ultimoNreg)
         accion = "nada"
         MostrarSituacionInicial()
         ds.Clear()
 
+        'BuscarUltimoCdComunidad()
         ConectarBD()
 
         If MaxRows > 0 Then
             MostrarRegistros(inc)
         Else
-            BAlta.Enabled = False
-            BBaja.Enabled = False
-            Binicio.Enabled = False
-            Batras.Enabled = False
-            Badelante.Enabled = False
-            Bfin.Enabled = False
+
+            'Deshabilito los botones de recorrer los registros
+            habilitarAlanteAtras()
 
             MsgBox("No hay ninguna Comunidad de Vecinos dados de Alta en la Base de Datos", CType(0, MsgBoxStyle), "Atención!!!") 'mensaje con ventana solo ok
 
@@ -42,9 +41,11 @@ Public Class FAltaCV
 
     Private Sub BModificaciones_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BModificaciones.Click
 
-        'muetro botón Aceptar
-        BAceptar.Visible = True
-        BAceptar.Enabled = True
+        'muetro botones Aceptar y Cancelar
+        mostrarAceptarCancelar()
+
+        'Deshabilito los botones de recorrer los registros
+        deshabilitarAlanteAtras()
 
         'habilito los campos de texto
         habilitarCamposTexto()
@@ -63,10 +64,13 @@ Public Class FAltaCV
     Private Sub Bbaja_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BBaja.Click
 
         'muetro botones Aceptar y Cancelar
-        mostrarAceptar()
+        mostrarAceptarCancelar()
 
         'Deshabilito botones de Altas y Bajas y modificaciones
         deshabilitarAltaBajaModi()
+
+        'Deshabilito los botones de recorrer los registros
+        deshabilitarAlanteAtras()
 
         accion = "baja"
 
@@ -77,8 +81,13 @@ Public Class FAltaCV
 
     Private Sub BAlta_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BAlta.Click
 
+        estoyNreg = inc
+
+        BuscarUltimoCdComunidad()
+        ConectarBD()
+
         'muetro botones Aceptar y Cancelar
-        mostrarAceptar()
+        mostrarAceptarCancelar()
 
         'Deshabilito botones de Altas y Bajas y modificaciones
         deshabilitarAltaBajaModi()
@@ -92,12 +101,50 @@ Public Class FAltaCV
         accion = "alta"
 
         limpiarCamposForm2()
-        Textcod.Text = CStr(MaxRows + 1)
+
+
+        Textcod.Text = CStr(ultimoNreg + 1)
+        'Textcod.Text = CStr(MaxRows + 1)
         Textnreg.Text = CStr(MaxRows + 1)
 
     End Sub
 
-    Private Sub BCancelar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub BCancelar_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BCancelar.Click
+
+        Select Case accion
+            Case "modifica"
+                'habilito los campos de texto
+                deshabilitarCamposTexto()
+
+            Case "alta"
+
+                ds.Clear()
+                ConectarBD()
+
+                inc = estoyNreg
+                If MaxRows > 0 Then
+                    MostrarRegistros(inc)
+                Else
+
+                    'Deshabilito los botones de recorrer los registros
+                    habilitarAlanteAtras()
+
+                    MsgBox("No hay ninguna Comunidad de Vecinos dados de Alta en la Base de Datos", CType(0, MsgBoxStyle), "Atención!!!") 'mensaje con ventana solo ok
+
+                End If
+
+            Case "baja"
+                MsgBox("Se cancela Baja de registro")
+        End Select
+
+        'botones Cancelar y Aceptar  no visibles y no habilitados
+        ocultarAceptarCancelar()
+
+        'Habilito botones de Altas y Bajas y modificaciones
+        habilitarAltaBajaModi()
+
+        'Habilito los botones de recorrer los registros
+        habilitarAlanteAtras()
 
         accion = "nada"
 
@@ -184,7 +231,7 @@ Public Class FAltaCV
             accion = "nada"
 
             'ocultos botones Aceptar y Cancelar
-            ocultarAceptar()
+            ocultarAceptarCancelar()
 
             'Habilito los botones de recorrer los registros
             habilitarAlanteAtras()
@@ -297,7 +344,7 @@ Public Class FAltaCV
 
     Private Sub MostrarRegistros(ByVal p1 As Integer)
 
-        Textnreg.Text = CStr(inc + 1) & " / " & CStr(MaxRows)
+        Textnreg.Text = CStr(p1 + 1) & " / " & CStr(MaxRows)
 
         Textcod.Text = ds.Tables("comunidad").Rows(p1).Item("codcomunidad").ToString
         Textcalle.Text = ds.Tables("comunidad").Rows(p1).Item("calle").ToString
@@ -466,23 +513,18 @@ Public Class FAltaCV
     Private Sub MostrarSituacionInicial()
 
         'botones Cancelar y Aceptar  no visibles y no habilitados
-        ocultarAceptar()
+        ocultarAceptarCancelar()
 
         'Deshabilita los campos de texto del formulario
         deshabilitarCamposTexto()
 
         Textnreg.Enabled = False  'muestra el nº de registro que se esta mostrando
 
-        'Botones que se habilitan
-        Binicio.Enabled = True
-        Batras.Enabled = True
-        Badelante.Enabled = True
-        Bfin.Enabled = True
+        'Habilito los botones de recorrer los registros
+        habilitarAlanteAtras()
 
-        'botones Alta, bajas, Modificaciones
-        BAlta.Enabled = True
-        BBaja.Enabled = True
-        BModificaciones.Enabled = True
+        'Habilito botones de Altas y Bajas y modificaciones
+        habilitarAltaBajaModi()
 
     End Sub
 
@@ -534,17 +576,23 @@ Public Class FAltaCV
         BModificaciones.Enabled = True
     End Sub
 
-    Private Sub mostrarAceptar()
+    Private Sub mostrarAceptarCancelar()
         'botones Cancelar y Aceptar  no visibles y no habilitados
         BAceptar.Visible = True
         BAceptar.Enabled = True
 
+        BCancelar.Visible = True
+        BCancelar.Enabled = True
+
     End Sub
 
-    Private Sub ocultarAceptar()
+    Private Sub ocultarAceptarCancelar()
         'botones Cancelar y Aceptar  no visibles y no habilitados
         BAceptar.Visible = False
         BAceptar.Enabled = False
+
+        BCancelar.Visible = False
+        BCancelar.Enabled = False
 
     End Sub
 
@@ -579,4 +627,6 @@ Public Class FAltaCV
         PictureBox2.Enabled = True
 
     End Sub
+
+
 End Class
