@@ -38,7 +38,7 @@ Module Funciones
     Public ultimoNreg As Integer   'variable que guarda el valor mayor del campo codcomundad de la BD
 
     'Conecto con la base de datos y saco todos los valores de una tabla
-    Public Sub ConectarBD()
+    Public Sub ConectarComunidad()
 
         Dim sql As String
 
@@ -70,7 +70,9 @@ Module Funciones
     End Sub
 
     'Me conecto a la base de datos y busco el último codcomunidad guardado
-    Public Sub BuscarUltimoCdComunidad()
+    Public Function BuscarUltimoCdComunidad() As Integer
+
+        Dim codigo As Integer
 
         Dim sql As String
 
@@ -94,7 +96,7 @@ Module Funciones
             MaxRows = ds.Tables("comunidad").Rows.Count
 
             'guardo el valor del codcomunidad mas alto que hay en la base de datos
-            ultimoNreg = CInt(ds.Tables("comunidad").Rows(MaxRows - 1).Item("codcomunidad"))
+            valor = CInt(ds.Tables("comunidad").Rows(MaxRows - 1).Item("codcomunidad"))
 
             ds.Clear()
 
@@ -102,7 +104,97 @@ Module Funciones
             MsgBox("Excepción: " & ex.Message)
         End Try
 
-        'MostrarRegistros(inc)
+        Return codigo
+
+    End Function
+
+
+    'Me conecto a la base de datos y busco el último codcomunidad guardado
+    Public Function BuscarUltimoCdVecinos() As Integer
+
+        Dim codigo As Integer
+
+        'para guardar donde se establece la conexión
+        Dim conn As New OleDb.OleDbConnection
+
+        'para crear el adaptador
+        Dim sqll As String
+        Dim daa As OleDb.OleDbDataAdapter
+
+        'para crear el conjunto de datos, el DataSet
+        Dim dss As New DataSet
+
+
+        Try
+            'conecto con la base de datos
+            con.ConnectionString = dbProvider & dbSource
+
+            'abro la base de datos
+            conn.Open()
+
+            sqll = "SELECT * FROM vecinos"
+
+            daa = New OleDb.OleDbDataAdapter(sqll, conn)
+
+            'Llenamos el DataSet con la informacion de la tabla comunidad
+            daa.Fill(dss, "vecinos")  'ds es el DataSet. da es TableAdapter
+            'cierro la conexión con la base de datos
+            conn.Close()
+
+            'recojo el nro de filas actuales en la tabla
+            MaxRows = dss.Tables("vecinos").Rows.Count
+
+            'preparo el índice que indica en que Posición estoy
+            inc = 0  ' Los registros de la base de datos empiezan en el registro 0
+
+        Catch ex As Exception
+            MsgBox("Excepción: " & ex.Message)
+        End Try
+
+        Return codigo
+
+    End Function
+
+    Public Sub ConectarVecinos(ByVal comuni As String)
+
+
+        'para guardar donde se establece la conexión
+        Dim conn As New OleDb.OleDbConnection
+
+        'para crear el adaptador
+        Dim sqll As String
+        Dim daa As OleDb.OleDbDataAdapter
+
+        'para crear el conjunto de datos, el DataSet
+        Dim dss As New DataSet
+
+
+        Try
+            'conecto con la base de datos
+            con.ConnectionString = dbProvider & dbSource
+
+            'abro la base de datos
+            conn.Open()
+
+            sqll = "SELECT * FROM vecinos WHERE ccomunidad = " & comuni & " ORDER BY codvecino "
+
+            daa = New OleDb.OleDbDataAdapter(sqll, conn)
+
+            'Llenamos el DataSet con la informacion de la tabla comunidad
+            daa.Fill(dss, "vecinos")  'ds es el DataSet. da es TableAdapter
+            'cierro la conexión con la base de datos
+            conn.Close()
+
+            'recojo el nro de filas actuales en la tabla
+            MaxRows = dss.Tables("vecinos").Rows.Count
+
+            'preparo el índice que indica en que Posición estoy
+            inc = 0  ' Los registros de la base de datos empiezan en el registro 0
+
+        Catch ex As Exception
+            MsgBox("Excepción: " & ex.Message)
+        End Try
+
     End Sub
 
     'indica si un caracter es solo de tipo número

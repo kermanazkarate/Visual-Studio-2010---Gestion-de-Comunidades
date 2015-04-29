@@ -5,7 +5,7 @@
 
         Me.Enabled = True
 
-        ConectarBD()
+        ConectarComunidad()
 
         ' Se habilita el combobox con la lista de todas las comunidades de vecions que estan dadas de alta en la aplicacion
         For i = 0 To MaxRows - 1

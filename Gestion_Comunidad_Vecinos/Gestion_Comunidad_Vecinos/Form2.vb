@@ -21,7 +21,7 @@ Public Class FAltaCV
         ds.Clear()
 
         'BuscarUltimoCdComunidad()
-        ConectarBD()
+        ConectarComunidad()
 
         If MaxRows > 0 Then
             MostrarRegistros(inc)
@@ -85,8 +85,11 @@ Public Class FAltaCV
 
         estoyNreg = inc
 
-        BuscarUltimoCdComunidad()
-        ConectarBD()
+        'BuscarUltimoCdComunidad()
+
+        Textcod.Text = CStr(BuscarUltimoCdComunidad() + 1)
+
+        ConectarComunidad()
 
         'muetro botones Aceptar y Cancelar
         mostrarAceptarCancelar()
@@ -104,8 +107,8 @@ Public Class FAltaCV
 
         limpiarCamposForm2()
 
+        'Textcod.Text = CStr(ultimoNreg + 1)
 
-        Textcod.Text = CStr(ultimoNreg + 1)
         'Textcod.Text = CStr(MaxRows + 1)
         Textnreg.Text = CStr(MaxRows + 1)
 
@@ -121,7 +124,7 @@ Public Class FAltaCV
             Case "alta"
 
                 ds.Clear()
-                ConectarBD()
+                ConectarComunidad()
 
                 inc = estoyNreg
                 If MaxRows > 0 Then
@@ -170,6 +173,12 @@ Public Class FAltaCV
 
         'Habilito los botones de Alta, bajas y Modificaciones
         habilitarAltaBajaModi()
+
+        'Habilito los botones de recorrer los registros
+        habilitarAlanteAtras()
+
+        'botones Cancelar y Aceptar  no visibles y no habilitados
+        ocultarAceptarCancelar()
 
     End Sub
 
@@ -246,7 +255,28 @@ Public Class FAltaCV
             'Deshabilito los campos de texto
             deshabilitarCamposTexto()
 
+            'Creamos los datos de los vecinos con los datos de la nueva comunidad introducidos
+            'Pasamos como parametros el nº de plantas, vecinos por planta y total vecinos
+            CrearVecinos(Textcod.Text, CInt(Textnplantas.Text), CInt(Textvplanta.Text), CInt(Texttvecinos.Text))
+
         End If
+
+    End Sub
+
+    Private Sub CrearVecinos(ByVal comunidad As String, ByVal np As Integer, ByVal nvp As Integer, ByVal ntv As Integer)
+        ' np = nº de plantas ; nvp = nº de vecinos por plantas (una letra a cada vecino) ; ntv = vecinos totales; 
+
+        Dim cb As New OleDb.OleDbCommandBuilder(da)
+
+        Dim dsNewRow As DataRow
+
+        BuscarUltimoCdVecinos()
+        ConectarVecinos(comunidad)
+
+        dsNewRow = ds.Tables("vecinos").NewRow
+
+
+
 
     End Sub
 
@@ -273,7 +303,7 @@ Public Class FAltaCV
             MostrarSituacionInicial()
             ds.Clear()
 
-            ConectarBD()
+            ConectarComunidad()
 
         End If
 
