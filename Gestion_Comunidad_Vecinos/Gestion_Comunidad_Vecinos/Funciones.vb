@@ -73,6 +73,7 @@ Module Funciones
     Public Function BuscarUltimoCdComunidad() As Integer
 
         Dim codigo As Integer
+        Dim valor As Integer
 
         Dim sql As String
 

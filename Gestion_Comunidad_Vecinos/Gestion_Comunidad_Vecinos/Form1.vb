@@ -14,21 +14,33 @@
             CBComunidad.Items.Add("C/ " & c1 & " " & c2)
         Next
 
+        CBComunidad.Text = "Seleccionar una comunidad de vecinos"
+
     End Sub
     Private Sub BSalir_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BSalir.Click
         Application.Exit()
     End Sub
 
     Private Sub BABMCV_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BABMCV.Click
-        Dim frm As New FAltaCV()
-        Me.Enabled = False
-        frm.Show()
+        'forma modal de abrir un formulario
+        Dim frm As New FAltaCV
+
+        frm.ShowDialog()
+
     End Sub
 
     Private Sub BEntrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BEntrar.Click
+
+        'forma modal de abrir un formulario
         Dim frm As New FMenuCV()
-        Me.Enabled = False
-        frm.Show()
+
+        If CBComunidad.Text = "Seleccionar una comunidad de vecinos" Then
+            MsgBox("Debe seleccionar una Comunidad de Vecinos", CType(0, MsgBoxStyle), "Atención!!!")
+        Else
+            Me.Enabled = False
+            frm.ShowDialog()
+        End If
+
     End Sub
 
     Private Sub CBComunidad_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CBComunidad.SelectedIndexChanged

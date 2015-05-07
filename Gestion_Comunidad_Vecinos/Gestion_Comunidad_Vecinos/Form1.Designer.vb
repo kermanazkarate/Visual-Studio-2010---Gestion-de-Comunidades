@@ -66,6 +66,7 @@ Partial Class FInicio
         '
         'GroupBox1
         '
+        Me.GroupBox1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.GroupBox1.Controls.Add(Me.BEntrar)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.CBComunidad)
@@ -104,6 +105,7 @@ Partial Class FInicio
         '
         'GroupBox2
         '
+        Me.GroupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.GroupBox2.Controls.Add(Me.Label2)
         Me.GroupBox2.Controls.Add(Me.BABMCV)
         Me.GroupBox2.Location = New System.Drawing.Point(66, 105)

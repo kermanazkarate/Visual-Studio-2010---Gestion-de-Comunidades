@@ -9,9 +9,9 @@ Public Class FAltaCV
 
 
     Private Sub BVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BVolver.Click
-        FInicio.BringToFront()
+        'FInicio.BringToFront()
         FInicio.Enabled = True
-        Close()
+        Me.Close()
     End Sub
 
     Private Sub FAltaCV_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -597,7 +597,9 @@ Public Class FAltaCV
         Textnplantas.Enabled = True
         Textvplanta.Enabled = True
         Texttvecinos.Enabled = True
-        TBalta.Enabled = True
+
+        TBalta.Enabled = False
+
         PictureBox1.Enabled = True
         TBbaja.Enabled = False
         PictureBox2.Enabled = False
@@ -663,14 +665,14 @@ Public Class FAltaCV
 
     Private Sub habilitarFechaBaja()
         'Habilita campo de fecha de bajo y boton asociado
-        TBbaja.Enabled = True
+        TBbaja.Enabled = False
         PictureBox2.Enabled = True
 
     End Sub
 
     Private Sub deshabilitarFechaBaja()
         'Habilita campo de fecha de bajo y boton asociado
-        TBbaja.Enabled = True
+        TBbaja.Enabled = False
         PictureBox2.Enabled = True
 
     End Sub

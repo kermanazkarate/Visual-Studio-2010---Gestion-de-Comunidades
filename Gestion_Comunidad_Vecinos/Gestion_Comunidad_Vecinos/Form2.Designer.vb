@@ -144,7 +144,7 @@ Partial Class FAltaCV
         '
         'CalendarioMes
         '
-        Me.CalendarioMes.Location = New System.Drawing.Point(330, 184)
+        Me.CalendarioMes.Location = New System.Drawing.Point(328, 184)
         Me.CalendarioMes.Name = "CalendarioMes"
         Me.CalendarioMes.TabIndex = 24
         Me.CalendarioMes.Visible = False
@@ -280,7 +280,7 @@ Partial Class FAltaCV
         'PictureBox1
         '
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(310, 228)
+        Me.PictureBox1.Location = New System.Drawing.Point(308, 227)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(18, 18)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -299,7 +299,7 @@ Partial Class FAltaCV
         'PictureBox2
         '
         Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(310, 286)
+        Me.PictureBox2.Location = New System.Drawing.Point(308, 285)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(18, 18)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
