@@ -23,6 +23,8 @@ Partial Class FAnadirGastos
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.BtVolver = New System.Windows.Forms.Button()
+        Me.TBComunidad = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'BtVolver
@@ -34,18 +36,41 @@ Partial Class FAnadirGastos
         Me.BtVolver.Text = "Volver"
         Me.BtVolver.UseVisualStyleBackColor = True
         '
+        'TBComunidad
+        '
+        Me.TBComunidad.BackColor = System.Drawing.Color.White
+        Me.TBComunidad.Enabled = False
+        Me.TBComunidad.Location = New System.Drawing.Point(187, 31)
+        Me.TBComunidad.Name = "TBComunidad"
+        Me.TBComunidad.Size = New System.Drawing.Size(211, 20)
+        Me.TBComunidad.TabIndex = 33
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(102, 34)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(63, 13)
+        Me.Label1.TabIndex = 32
+        Me.Label1.Text = "Comunidad:"
+        '
         'FAnadirGastos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(515, 325)
+        Me.Controls.Add(Me.TBComunidad)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtVolver)
         Me.Name = "FAnadirGastos"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "AÑADIR GASTOS"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents BtVolver As System.Windows.Forms.Button
+    Friend WithEvents TBComunidad As System.Windows.Forms.TextBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
 End Class

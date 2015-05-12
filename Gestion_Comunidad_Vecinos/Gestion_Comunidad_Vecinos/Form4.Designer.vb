@@ -57,11 +57,11 @@ Partial Class FcuotaComunidad
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(97, 123)
+        Me.Label2.Location = New System.Drawing.Point(79, 123)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(45, 13)
+        Me.Label2.Size = New System.Drawing.Size(81, 13)
         Me.Label2.TabIndex = 5
-        Me.Label2.Text = "Importe:"
+        Me.Label2.Text = "Importe (Euros):"
         '
         'Label3
         '

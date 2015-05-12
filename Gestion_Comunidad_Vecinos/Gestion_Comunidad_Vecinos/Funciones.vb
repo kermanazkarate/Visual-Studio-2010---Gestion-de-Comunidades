@@ -4,6 +4,8 @@ Imports System.IO
 
 Module Funciones
 
+    Public listado As String  'indica que listado se visualizara primero
+
     'Variable que indica la comunidad que selecciono
     Public miComunidad As String
     Public miNum As Integer

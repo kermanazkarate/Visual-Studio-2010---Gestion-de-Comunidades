@@ -36,8 +36,10 @@ Partial Class FMenuCV
         Me.Button10 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -60,7 +62,7 @@ Partial Class FMenuCV
         '
         'BtCuotaComunidad
         '
-        Me.BtCuotaComunidad.Location = New System.Drawing.Point(195, 74)
+        Me.BtCuotaComunidad.Location = New System.Drawing.Point(48, 27)
         Me.BtCuotaComunidad.Name = "BtCuotaComunidad"
         Me.BtCuotaComunidad.Size = New System.Drawing.Size(456, 24)
         Me.BtCuotaComunidad.TabIndex = 2
@@ -69,7 +71,7 @@ Partial Class FMenuCV
         '
         'BtAdminComunidad
         '
-        Me.BtAdminComunidad.Location = New System.Drawing.Point(195, 112)
+        Me.BtAdminComunidad.Location = New System.Drawing.Point(48, 65)
         Me.BtAdminComunidad.Name = "BtAdminComunidad"
         Me.BtAdminComunidad.Size = New System.Drawing.Size(456, 24)
         Me.BtAdminComunidad.TabIndex = 3
@@ -78,7 +80,7 @@ Partial Class FMenuCV
         '
         'BtVecinosComunidad
         '
-        Me.BtVecinosComunidad.Location = New System.Drawing.Point(195, 150)
+        Me.BtVecinosComunidad.Location = New System.Drawing.Point(48, 103)
         Me.BtVecinosComunidad.Name = "BtVecinosComunidad"
         Me.BtVecinosComunidad.Size = New System.Drawing.Size(456, 24)
         Me.BtVecinosComunidad.TabIndex = 4
@@ -87,7 +89,7 @@ Partial Class FMenuCV
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(195, 191)
+        Me.Button4.Location = New System.Drawing.Point(48, 144)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(456, 25)
         Me.Button4.TabIndex = 5
@@ -116,7 +118,7 @@ Partial Class FMenuCV
         '
         Me.GroupBox1.Controls.Add(Me.BtAnadirIngreso)
         Me.GroupBox1.Controls.Add(Me.BtAnadirGasto)
-        Me.GroupBox1.Location = New System.Drawing.Point(143, 235)
+        Me.GroupBox1.Location = New System.Drawing.Point(143, 276)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(551, 111)
         Me.GroupBox1.TabIndex = 8
@@ -125,7 +127,7 @@ Partial Class FMenuCV
         '
         'BtVolver
         '
-        Me.BtVolver.Location = New System.Drawing.Point(347, 507)
+        Me.BtVolver.Location = New System.Drawing.Point(347, 548)
         Me.BtVolver.Name = "BtVolver"
         Me.BtVolver.Size = New System.Drawing.Size(133, 23)
         Me.BtVolver.TabIndex = 9
@@ -137,7 +139,7 @@ Partial Class FMenuCV
         Me.GroupBox2.Controls.Add(Me.Button10)
         Me.GroupBox2.Controls.Add(Me.Button8)
         Me.GroupBox2.Controls.Add(Me.Button9)
-        Me.GroupBox2.Location = New System.Drawing.Point(143, 363)
+        Me.GroupBox2.Location = New System.Drawing.Point(143, 404)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(550, 129)
         Me.GroupBox2.TabIndex = 10
@@ -171,19 +173,29 @@ Partial Class FMenuCV
         Me.Button9.Text = "Listado de Vecinos"
         Me.Button9.UseVisualStyleBackColor = True
         '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.Button4)
+        Me.GroupBox3.Controls.Add(Me.BtVecinosComunidad)
+        Me.GroupBox3.Controls.Add(Me.BtAdminComunidad)
+        Me.GroupBox3.Controls.Add(Me.BtCuotaComunidad)
+        Me.GroupBox3.Location = New System.Drawing.Point(143, 70)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(550, 186)
+        Me.GroupBox3.TabIndex = 11
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Comunidad"
+        '
         'FMenuCV
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(880, 544)
+        Me.ClientSize = New System.Drawing.Size(880, 580)
+        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.BtVolver)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.Button4)
-        Me.Controls.Add(Me.BtVecinosComunidad)
-        Me.Controls.Add(Me.BtAdminComunidad)
-        Me.Controls.Add(Me.BtCuotaComunidad)
         Me.Controls.Add(Me.TBcomunidad)
         Me.Controls.Add(Me.Label1)
         Me.Name = "FMenuCV"
@@ -191,6 +203,7 @@ Partial Class FMenuCV
         Me.Text = " GESTION COMUNIDAD DE VECINOS"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -209,4 +222,5 @@ Partial Class FMenuCV
     Friend WithEvents Button10 As System.Windows.Forms.Button
     Friend WithEvents Button8 As System.Windows.Forms.Button
     Friend WithEvents Button9 As System.Windows.Forms.Button
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
 End Class

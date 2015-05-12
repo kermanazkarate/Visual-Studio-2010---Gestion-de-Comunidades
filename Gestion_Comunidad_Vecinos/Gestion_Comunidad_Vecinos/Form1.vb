@@ -37,7 +37,6 @@
         If CBComunidad.Text = "Seleccionar una comunidad de vecinos" Then
             MsgBox("Debe seleccionar una Comunidad de Vecinos", CType(0, MsgBoxStyle), "Atención!!!")
         Else
-            Me.Enabled = False
             frm.ShowDialog()
         End If
 

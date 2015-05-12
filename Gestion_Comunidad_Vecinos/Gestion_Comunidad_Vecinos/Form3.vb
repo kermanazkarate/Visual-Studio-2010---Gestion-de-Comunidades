@@ -1,5 +1,6 @@
 ﻿Public Class FMenuCV
 
+
     Private Sub FMenuCV_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         TBcomunidad.Text = miComunidad
@@ -7,7 +8,6 @@
     End Sub
 
     Private Sub BtVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtVolver.Click
-        'FInicio.BringToFront()
         FInicio.Enabled = True
         Close()
     End Sub
@@ -57,6 +57,33 @@
     Private Sub BtAnadirIngreso_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtAnadirIngreso.Click
         'forma modal de abrir un formulario
         Dim frm As New FAnadirIngresos()
+
+        frm.ShowDialog()
+    End Sub
+
+    Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
+        'forma modal de abrir un formulario
+        Dim frm As New FListados()
+
+        listado = "vecinos"
+
+        frm.ShowDialog()
+    End Sub
+
+    Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
+        'forma modal de abrir un formulario
+        Dim frm As New FListados()
+
+        listado = "gastos"
+
+        frm.ShowDialog()
+    End Sub
+
+    Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
+        'forma modal de abrir un formulario
+        Dim frm As New FListados()
+
+        listado = "ingresos"
 
         frm.ShowDialog()
     End Sub

@@ -20,12 +20,10 @@ D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Veci
 D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.FInicio.resources
 D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.FAltaCV.resources
 D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.FMenuCV.resources
-D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.Form10.resources
-D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.Form11.resources
-D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.Form12.resources
 D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.FcuotaComunidad.resources
 D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.FAdminComunidad.resources
 D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.FVecinosComunidad.resources
 D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.FProvComunidad.resources
 D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.FAnadirGastos.resources
 D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.FAnadirIngresos.resources
+D:\SourceTree\Visual-Studio-2010---Gestion-de-Comunidades\Gestion_Comunidad_Vecinos\Gestion_Comunidad_Vecinos\obj\x86\Debug\Gestion_Comunidad_Vecinos.FListados.resources
