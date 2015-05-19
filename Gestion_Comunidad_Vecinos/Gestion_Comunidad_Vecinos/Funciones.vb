@@ -4,9 +4,9 @@ Imports System.IO
 
 Module Funciones
 
-    Public listado As String  'indica que listado se visualizara primero
+    Public listado As String  'indica que pestaña del listado se visualizara primero
 
-    'Variable que indica la comunidad que selecciono
+    'Variable que indica la comunidad seleccionada
     Public miComunidad As String
     Public miNum As Integer
     Public codComunidad As Integer
@@ -26,12 +26,15 @@ Module Funciones
     Public con As New OleDb.OleDbConnection
 
     'para crear el adaptador
-    Public sql As String
-    Public da As OleDb.OleDbDataAdapter
+    ' Public sql As String
+
+    Public da As OleDb.OleDbDataAdapter   'para comunidad
+    Dim daa As OleDb.OleDbDataAdapter     'para vecinos
+
 
     'para crear el conjunto de datos, el DataSet
-    Public ds As New DataSet
-    'Dim ds As New DataTable()
+    Public ds As New DataSet    'dataset comunidad
+    Public dss As New DataSet    ' dataset vecinos
 
     'para acceder a las filas en la tabla
     Public MaxRows As Integer     ' Variable que indica en nº maximo de registros o lineas
@@ -74,7 +77,6 @@ Module Funciones
     'Me conecto a la base de datos y busco el último codcomunidad guardado
     Public Function BuscarUltimoCdComunidad() As Integer
 
-        Dim codigo As Integer
         Dim valor As Integer
 
         Dim sql As String
@@ -86,7 +88,7 @@ Module Funciones
             'abro la base de datos
             con.Open()
 
-            sql = "SELECT * FROM comunidad"
+            sql = "SELECT * FROM comunidad ORDER BY codcomunidad"
 
             da = New OleDb.OleDbDataAdapter(sql, con)
 
@@ -107,25 +109,27 @@ Module Funciones
             MsgBox("Excepción: " & ex.Message)
         End Try
 
-        Return codigo
+        'MsgBox("Valor: " & valor)
+
+        Return valor
 
     End Function
 
 
-    'Me conecto a la base de datos y busco el último codcomunidad guardado
+    'Me conecto a la base de datos y busco el último codvecino guardado
     Public Function BuscarUltimoCdVecinos() As Integer
 
-        Dim codigo As Integer
+        Dim valor As Integer
 
         'para guardar donde se establece la conexión
         Dim conn As New OleDb.OleDbConnection
 
         'para crear el adaptador
         Dim sqll As String
-        Dim daa As OleDb.OleDbDataAdapter
+        'Dim daa As OleDb.OleDbDataAdapter
 
         'para crear el conjunto de datos, el DataSet
-        Dim dss As New DataSet
+        'Dim dss As New DataSet
 
 
         Try
@@ -135,7 +139,7 @@ Module Funciones
             'abro la base de datos
             conn.Open()
 
-            sqll = "SELECT * FROM vecinos"
+            sqll = "SELECT * FROM vecinos ORDER BY codvecino"
 
             daa = New OleDb.OleDbDataAdapter(sqll, conn)
 
@@ -147,16 +151,71 @@ Module Funciones
             'recojo el nro de filas actuales en la tabla
             MaxRows = dss.Tables("vecinos").Rows.Count
 
-            'preparo el índice que indica en que Posición estoy
-            inc = 0  ' Los registros de la base de datos empiezan en el registro 0
+            'guardo el valor del codcomunidad mas alto que hay en la base de datos
+            valor = CInt(ds.Tables("vecinos").Rows(MaxRows - 1).Item("codvecino"))
+
+            dss.Clear()
 
         Catch ex As Exception
             MsgBox("Excepción: " & ex.Message)
         End Try
 
-        Return codigo
+        Return valor
 
     End Function
+
+    Public Sub CrearVecinos(ByVal codComuni As Integer, ByVal nPltas As Integer, ByVal nVecPlta As Integer, ByVal nTotalVec As Integer)
+        ' codComuni = Codigo Comunidad, nPltas = nº de plantas ; nVecPlta = nº de vecinos por plantas (una letra a cada vecino) ; nTotalVec = vecinos totales; 
+
+        Dim cb As New OleDb.OleDbCommandBuilder(da)
+
+        Dim dsNewRow As DataRow
+
+
+        Dim codigo, piso, totVecinos, codAscii As Integer
+        Dim letra As Char
+
+        'Pasos:
+
+        '1 - Buscar el último codvecino guardado en la tabla vecinos
+        codigo = BuscarUltimoCdVecinos()
+        MsgBox("´Cod Ultimo vecino introducido: " & codigo)
+
+        '2 - añadir registros al la tabla vecinos igual al ntv
+
+        'Las letras mayusculas A-Z van del codigo ascii 65 al 90
+        codAscii = 64
+
+        piso = 1
+
+
+        While piso <= nPltas Or totVecinos <= nTotalVec
+
+            For index = 1 To nVecPlta
+
+                dsNewRow = dss.Tables("vecinos").NewRow
+
+                codigo = codigo + 1
+                dsNewRow.Item("codvecinos") = CInt(codigo)
+
+                dsNewRow.Item("piso") = CInt(piso)
+
+                codAscii = codAscii + 1
+                letra = Chr(codAscii)
+                dsNewRow.Item("letra") = CStr(letra)
+
+                dsNewRow.Item("ccomunidad") = CInt(codComuni)
+
+                dss.Tables("comunidad").Rows.Add(dsNewRow)
+                daa.Update(ds, "comunidad")
+            Next
+
+            piso = piso + 1
+
+        End While
+
+
+    End Sub
 
     Public Sub ConectarVecinos(ByVal comuni As String)
 

@@ -1,14 +1,16 @@
 ﻿Public Class FListados
 
     Private Sub Form13_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
+        TBComunidad.Text = miComunidad
         Select Case listado
             Case "vecinos"
                 TabControl1.SelectedIndex = 0
-            Case "gastos"
+            Case "proveedor"
                 TabControl1.SelectedIndex = 1
-            Case "ingresos"
+            Case "gastos"
                 TabControl1.SelectedIndex = 2
+            Case "ingresos"
+                TabControl1.SelectedIndex = 3
             Case Else
                 TabControl1.SelectedIndex = 0
         End Select

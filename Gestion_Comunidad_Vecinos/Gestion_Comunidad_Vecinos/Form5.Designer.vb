@@ -35,6 +35,10 @@ Partial Class FAdminComunidad
         Me.CalendarioMes = New System.Windows.Forms.MonthCalendar()
         Me.BtVolver = New System.Windows.Forms.Button()
         Me.CBAdministrador = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -60,7 +64,7 @@ Partial Class FAdminComunidad
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(82, 107)
+        Me.Label2.Location = New System.Drawing.Point(82, 143)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(73, 13)
         Me.Label2.TabIndex = 7
@@ -69,7 +73,7 @@ Partial Class FAdminComunidad
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(82, 166)
+        Me.Label3.Location = New System.Drawing.Point(82, 206)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(80, 13)
         Me.Label3.TabIndex = 9
@@ -78,7 +82,7 @@ Partial Class FAdminComunidad
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(82, 216)
+        Me.Label4.Location = New System.Drawing.Point(82, 256)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(72, 13)
         Me.Label4.TabIndex = 10
@@ -87,7 +91,7 @@ Partial Class FAdminComunidad
         'TextBox2
         '
         Me.TextBox2.Enabled = False
-        Me.TextBox2.Location = New System.Drawing.Point(168, 163)
+        Me.TextBox2.Location = New System.Drawing.Point(168, 203)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(91, 20)
         Me.TextBox2.TabIndex = 11
@@ -95,7 +99,7 @@ Partial Class FAdminComunidad
         'TextBox3
         '
         Me.TextBox3.Enabled = False
-        Me.TextBox3.Location = New System.Drawing.Point(166, 213)
+        Me.TextBox3.Location = New System.Drawing.Point(166, 253)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(92, 20)
         Me.TextBox3.TabIndex = 12
@@ -103,7 +107,7 @@ Partial Class FAdminComunidad
         'PictureBox2
         '
         Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(260, 214)
+        Me.PictureBox2.Location = New System.Drawing.Point(260, 254)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(18, 18)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -113,7 +117,7 @@ Partial Class FAdminComunidad
         'PictureBox1
         '
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(261, 164)
+        Me.PictureBox1.Location = New System.Drawing.Point(261, 204)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(18, 18)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -122,7 +126,7 @@ Partial Class FAdminComunidad
         '
         'CalendarioMes
         '
-        Me.CalendarioMes.Location = New System.Drawing.Point(281, 129)
+        Me.CalendarioMes.Location = New System.Drawing.Point(281, 169)
         Me.CalendarioMes.Name = "CalendarioMes"
         Me.CalendarioMes.TabIndex = 28
         Me.CalendarioMes.Visible = False
@@ -141,10 +145,42 @@ Partial Class FAdminComunidad
         Me.CBAdministrador.BackColor = System.Drawing.Color.White
         Me.CBAdministrador.Enabled = False
         Me.CBAdministrador.FormattingEnabled = True
-        Me.CBAdministrador.Location = New System.Drawing.Point(168, 104)
+        Me.CBAdministrador.Location = New System.Drawing.Point(168, 140)
         Me.CBAdministrador.Name = "CBAdministrador"
         Me.CBAdministrador.Size = New System.Drawing.Size(211, 21)
         Me.CBAdministrador.TabIndex = 30
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(116, 89)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(30, 13)
+        Me.Label5.TabIndex = 31
+        Me.Label5.Text = "Piso:"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(265, 85)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(34, 13)
+        Me.Label6.TabIndex = 32
+        Me.Label6.Text = "Letra:"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(168, 82)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(68, 20)
+        Me.TextBox1.TabIndex = 33
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Location = New System.Drawing.Point(311, 82)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(68, 20)
+        Me.TextBox4.TabIndex = 34
         '
         'FAdminComunidad
         '
@@ -152,6 +188,10 @@ Partial Class FAdminComunidad
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(561, 386)
+        Me.Controls.Add(Me.TextBox4)
+        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.CBAdministrador)
         Me.Controls.Add(Me.BtVolver)
         Me.Controls.Add(Me.CalendarioMes)
@@ -185,4 +225,8 @@ Partial Class FAdminComunidad
     Friend WithEvents CalendarioMes As System.Windows.Forms.MonthCalendar
     Friend WithEvents BtVolver As System.Windows.Forms.Button
     Friend WithEvents CBAdministrador As System.Windows.Forms.ComboBox
+    Friend WithEvents Label5 As System.Windows.Forms.Label
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
+    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
 End Class

@@ -6,4 +6,7 @@
 
     End Sub
 
+    Private Sub FVecinosComunidad_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        TBComunidad.Text = miComunidad
+    End Sub
 End Class

@@ -47,7 +47,7 @@ Partial Class FVecinosComunidad
         Me.BAceptar = New System.Windows.Forms.Button()
         Me.CBComunidad = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.TBComunidad = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -276,12 +276,13 @@ Partial Class FVecinosComunidad
         Me.Label8.TabIndex = 57
         Me.Label8.Text = "Vecino:"
         '
-        'TextBox7
+        'TBComunidad
         '
-        Me.TextBox7.Location = New System.Drawing.Point(212, 22)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(251, 20)
-        Me.TextBox7.TabIndex = 58
+        Me.TBComunidad.Enabled = False
+        Me.TBComunidad.Location = New System.Drawing.Point(212, 22)
+        Me.TBComunidad.Name = "TBComunidad"
+        Me.TBComunidad.Size = New System.Drawing.Size(251, 20)
+        Me.TBComunidad.TabIndex = 58
         '
         'FVecinosComunidad
         '
@@ -289,7 +290,7 @@ Partial Class FVecinosComunidad
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(600, 501)
-        Me.Controls.Add(Me.TextBox7)
+        Me.Controls.Add(Me.TBComunidad)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.CBComunidad)
         Me.Controls.Add(Me.BCancelar)
@@ -337,5 +338,5 @@ Partial Class FVecinosComunidad
     Friend WithEvents BAceptar As System.Windows.Forms.Button
     Friend WithEvents CBComunidad As System.Windows.Forms.ComboBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents TextBox7 As System.Windows.Forms.TextBox
+    Friend WithEvents TBComunidad As System.Windows.Forms.TextBox
 End Class

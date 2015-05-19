@@ -33,9 +33,10 @@ Partial Class FMenuCV
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.BtVolver = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Button10 = New System.Windows.Forms.Button()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
+        Me.BProveedores = New System.Windows.Forms.Button()
+        Me.BIngresos = New System.Windows.Forms.Button()
+        Me.BGastos = New System.Windows.Forms.Button()
+        Me.BVecinos = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -62,7 +63,7 @@ Partial Class FMenuCV
         '
         'BtCuotaComunidad
         '
-        Me.BtCuotaComunidad.Location = New System.Drawing.Point(48, 27)
+        Me.BtCuotaComunidad.Location = New System.Drawing.Point(74, 31)
         Me.BtCuotaComunidad.Name = "BtCuotaComunidad"
         Me.BtCuotaComunidad.Size = New System.Drawing.Size(456, 24)
         Me.BtCuotaComunidad.TabIndex = 2
@@ -71,7 +72,7 @@ Partial Class FMenuCV
         '
         'BtAdminComunidad
         '
-        Me.BtAdminComunidad.Location = New System.Drawing.Point(48, 65)
+        Me.BtAdminComunidad.Location = New System.Drawing.Point(74, 66)
         Me.BtAdminComunidad.Name = "BtAdminComunidad"
         Me.BtAdminComunidad.Size = New System.Drawing.Size(456, 24)
         Me.BtAdminComunidad.TabIndex = 3
@@ -80,7 +81,7 @@ Partial Class FMenuCV
         '
         'BtVecinosComunidad
         '
-        Me.BtVecinosComunidad.Location = New System.Drawing.Point(48, 103)
+        Me.BtVecinosComunidad.Location = New System.Drawing.Point(74, 101)
         Me.BtVecinosComunidad.Name = "BtVecinosComunidad"
         Me.BtVecinosComunidad.Size = New System.Drawing.Size(456, 24)
         Me.BtVecinosComunidad.TabIndex = 4
@@ -89,16 +90,16 @@ Partial Class FMenuCV
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(48, 144)
+        Me.Button4.Location = New System.Drawing.Point(74, 136)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(456, 25)
         Me.Button4.TabIndex = 5
-        Me.Button4.Text = "Proveedores de la comunidad"
+        Me.Button4.Text = "Nuevo Proveedor"
         Me.Button4.UseVisualStyleBackColor = True
         '
         'BtAnadirGasto
         '
-        Me.BtAnadirGasto.Location = New System.Drawing.Point(52, 29)
+        Me.BtAnadirGasto.Location = New System.Drawing.Point(74, 33)
         Me.BtAnadirGasto.Name = "BtAnadirGasto"
         Me.BtAnadirGasto.Size = New System.Drawing.Size(456, 25)
         Me.BtAnadirGasto.TabIndex = 6
@@ -107,7 +108,7 @@ Partial Class FMenuCV
         '
         'BtAnadirIngreso
         '
-        Me.BtAnadirIngreso.Location = New System.Drawing.Point(51, 65)
+        Me.BtAnadirIngreso.Location = New System.Drawing.Point(73, 69)
         Me.BtAnadirIngreso.Name = "BtAnadirIngreso"
         Me.BtAnadirIngreso.Size = New System.Drawing.Size(457, 26)
         Me.BtAnadirIngreso.TabIndex = 7
@@ -118,60 +119,70 @@ Partial Class FMenuCV
         '
         Me.GroupBox1.Controls.Add(Me.BtAnadirIngreso)
         Me.GroupBox1.Controls.Add(Me.BtAnadirGasto)
-        Me.GroupBox1.Location = New System.Drawing.Point(143, 276)
+        Me.GroupBox1.Location = New System.Drawing.Point(121, 276)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(551, 111)
+        Me.GroupBox1.Size = New System.Drawing.Size(589, 111)
         Me.GroupBox1.TabIndex = 8
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Asientos Contables"
         '
         'BtVolver
         '
-        Me.BtVolver.Location = New System.Drawing.Point(347, 548)
+        Me.BtVolver.Location = New System.Drawing.Point(347, 607)
         Me.BtVolver.Name = "BtVolver"
         Me.BtVolver.Size = New System.Drawing.Size(133, 23)
-        Me.BtVolver.TabIndex = 9
+        Me.BtVolver.TabIndex = 12
         Me.BtVolver.Text = "Volver"
         Me.BtVolver.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.Button10)
-        Me.GroupBox2.Controls.Add(Me.Button8)
-        Me.GroupBox2.Controls.Add(Me.Button9)
-        Me.GroupBox2.Location = New System.Drawing.Point(143, 404)
+        Me.GroupBox2.Controls.Add(Me.BProveedores)
+        Me.GroupBox2.Controls.Add(Me.BIngresos)
+        Me.GroupBox2.Controls.Add(Me.BGastos)
+        Me.GroupBox2.Controls.Add(Me.BVecinos)
+        Me.GroupBox2.Location = New System.Drawing.Point(121, 404)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(550, 129)
+        Me.GroupBox2.Size = New System.Drawing.Size(589, 178)
         Me.GroupBox2.TabIndex = 10
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Listados"
         '
-        'Button10
+        'BProveedores
         '
-        Me.Button10.Location = New System.Drawing.Point(47, 91)
-        Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(457, 26)
-        Me.Button10.TabIndex = 10
-        Me.Button10.Text = "Listado de Ingresos"
-        Me.Button10.UseVisualStyleBackColor = True
+        Me.BProveedores.Location = New System.Drawing.Point(73, 61)
+        Me.BProveedores.Name = "BProveedores"
+        Me.BProveedores.Size = New System.Drawing.Size(457, 26)
+        Me.BProveedores.TabIndex = 9
+        Me.BProveedores.Text = "Listado de Proveedores"
+        Me.BProveedores.UseVisualStyleBackColor = True
         '
-        'Button8
+        'BIngresos
         '
-        Me.Button8.Location = New System.Drawing.Point(47, 55)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(457, 26)
-        Me.Button8.TabIndex = 9
-        Me.Button8.Text = "Listado de Gastos"
-        Me.Button8.UseVisualStyleBackColor = True
+        Me.BIngresos.Location = New System.Drawing.Point(73, 135)
+        Me.BIngresos.Name = "BIngresos"
+        Me.BIngresos.Size = New System.Drawing.Size(457, 26)
+        Me.BIngresos.TabIndex = 11
+        Me.BIngresos.Text = "Listado de Ingresos"
+        Me.BIngresos.UseVisualStyleBackColor = True
         '
-        'Button9
+        'BGastos
         '
-        Me.Button9.Location = New System.Drawing.Point(48, 20)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(456, 25)
-        Me.Button9.TabIndex = 8
-        Me.Button9.Text = "Listado de Vecinos"
-        Me.Button9.UseVisualStyleBackColor = True
+        Me.BGastos.Location = New System.Drawing.Point(73, 98)
+        Me.BGastos.Name = "BGastos"
+        Me.BGastos.Size = New System.Drawing.Size(457, 26)
+        Me.BGastos.TabIndex = 10
+        Me.BGastos.Text = "Listado de Gastos"
+        Me.BGastos.UseVisualStyleBackColor = True
+        '
+        'BVecinos
+        '
+        Me.BVecinos.Location = New System.Drawing.Point(73, 25)
+        Me.BVecinos.Name = "BVecinos"
+        Me.BVecinos.Size = New System.Drawing.Size(457, 25)
+        Me.BVecinos.TabIndex = 8
+        Me.BVecinos.Text = "Listado de Vecinos"
+        Me.BVecinos.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
@@ -179,9 +190,9 @@ Partial Class FMenuCV
         Me.GroupBox3.Controls.Add(Me.BtVecinosComunidad)
         Me.GroupBox3.Controls.Add(Me.BtAdminComunidad)
         Me.GroupBox3.Controls.Add(Me.BtCuotaComunidad)
-        Me.GroupBox3.Location = New System.Drawing.Point(143, 70)
+        Me.GroupBox3.Location = New System.Drawing.Point(121, 70)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(550, 186)
+        Me.GroupBox3.Size = New System.Drawing.Size(589, 186)
         Me.GroupBox3.TabIndex = 11
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Comunidad"
@@ -191,7 +202,7 @@ Partial Class FMenuCV
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(880, 580)
+        Me.ClientSize = New System.Drawing.Size(880, 652)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.BtVolver)
@@ -219,8 +230,9 @@ Partial Class FMenuCV
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents BtVolver As System.Windows.Forms.Button
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents Button10 As System.Windows.Forms.Button
-    Friend WithEvents Button8 As System.Windows.Forms.Button
-    Friend WithEvents Button9 As System.Windows.Forms.Button
+    Friend WithEvents BIngresos As System.Windows.Forms.Button
+    Friend WithEvents BGastos As System.Windows.Forms.Button
+    Friend WithEvents BVecinos As System.Windows.Forms.Button
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents BProveedores As System.Windows.Forms.Button
 End Class

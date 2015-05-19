@@ -48,6 +48,7 @@ Partial Class FcuotaComunidad
         '
         'TBComunidad
         '
+        Me.TBComunidad.BackColor = System.Drawing.Color.White
         Me.TBComunidad.Enabled = False
         Me.TBComunidad.Location = New System.Drawing.Point(166, 68)
         Me.TBComunidad.Name = "TBComunidad"
@@ -74,6 +75,7 @@ Partial Class FcuotaComunidad
         '
         'TBImporte
         '
+        Me.TBImporte.BackColor = System.Drawing.Color.White
         Me.TBImporte.Location = New System.Drawing.Point(166, 120)
         Me.TBImporte.Name = "TBImporte"
         Me.TBImporte.Size = New System.Drawing.Size(130, 20)

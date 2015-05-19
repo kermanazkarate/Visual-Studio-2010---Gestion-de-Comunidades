@@ -85,8 +85,7 @@ Public Class FAltaCV
 
         estoyNreg = inc
 
-        'BuscarUltimoCdComunidad()
-
+        'Busco el valor del último codigo de comunidad guardado en la tabla para sumarle 1 
         Textcod.Text = CStr(BuscarUltimoCdComunidad() + 1)
 
         ConectarComunidad()
@@ -177,8 +176,12 @@ Public Class FAltaCV
         'Habilito los botones de recorrer los registros
         habilitarAlanteAtras()
 
-        'botones Cancelar y Aceptar  no visibles y no habilitados
-        ocultarAceptarCancelar()
+
+        If accion = "nada" Or accion = "modifica" Then
+            'botones Cancelar y Aceptar  no visibles y no habilitados
+            ocultarAceptarCancelar()
+        End If
+
 
     End Sub
 
@@ -221,7 +224,7 @@ Public Class FAltaCV
 
             Try
                 dsNewRow.Item("codcomunidad") = CInt(Textcod.Text)
-                dsNewRow.Item("calle") = Textcalle.Text
+                dsNewRow.Item("calle") = CStr(Textcalle.Text)
                 dsNewRow.Item("numero") = CInt(Textnum.Text)
                 dsNewRow.Item("nplantas") = CInt(Textnplantas.Text)
                 dsNewRow.Item("vecinosplanta") = CInt(Textvplanta.Text)
@@ -255,28 +258,13 @@ Public Class FAltaCV
             'Deshabilito los campos de texto
             deshabilitarCamposTexto()
 
+
+            '---CREAR VECINOS---
             'Creamos los datos de los vecinos con los datos de la nueva comunidad introducidos
-            'Pasamos como parametros el nº de plantas, vecinos por planta y total vecinos
-            CrearVecinos(Textcod.Text, CInt(Textnplantas.Text), CInt(Textvplanta.Text), CInt(Texttvecinos.Text))
+            'Pasamos como parametros el Nº de plantas, Nº de vecinos por planta y Total vecinos
+            CrearVecinos(CInt(Textcod.Text), CInt(Textnplantas.Text), CInt(Textvplanta.Text), CInt(Texttvecinos.Text))
 
         End If
-
-    End Sub
-
-    Private Sub CrearVecinos(ByVal comunidad As String, ByVal np As Integer, ByVal nvp As Integer, ByVal ntv As Integer)
-        ' np = nº de plantas ; nvp = nº de vecinos por plantas (una letra a cada vecino) ; ntv = vecinos totales; 
-
-        Dim cb As New OleDb.OleDbCommandBuilder(da)
-
-        Dim dsNewRow As DataRow
-
-        BuscarUltimoCdVecinos()
-        ConectarVecinos(comunidad)
-
-        dsNewRow = ds.Tables("vecinos").NewRow
-
-
-
 
     End Sub
 
@@ -300,10 +288,16 @@ Public Class FAltaCV
             MsgBox("Registro Borrado de la base de datos")
 
             accion = "nada"
+
             MostrarSituacionInicial()
+
             ds.Clear()
 
             ConectarComunidad()
+
+            MsgBox(inc)
+
+            MostrarRegistros(inc)
 
         End If
 
@@ -399,7 +393,7 @@ Public Class FAltaCV
 
     Private Sub limpiarCamposForm2()
 
-        Textcod.Text = ""
+        'Textcod.Text = ""
         Textcalle.Text = ""
         Textnum.Text = ""
         Texttvecinos.Text = ""
@@ -559,7 +553,7 @@ Public Class FAltaCV
 
     Private Sub MostrarSituacionInicial()
 
-        'botones Cancelar y Aceptar  no visibles y no habilitados
+        'botones Cancelar y Aceptar no visibles y no habilitados
         ocultarAceptarCancelar()
 
         'Deshabilita los campos de texto del formulario
@@ -572,6 +566,9 @@ Public Class FAltaCV
 
         'Habilito botones de Altas y Bajas y modificaciones
         habilitarAltaBajaModi()
+
+        'Limpiar campo fecha de baja
+        TBbaja.Text = ""
 
     End Sub
 

@@ -5,6 +5,9 @@
 
         TBcomunidad.Text = miComunidad
 
+        'Selecciono el primer botón de la lista en pantalla, por defecto
+        BtCuotaComunidad.Select()
+
     End Sub
 
     Private Sub BtVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtVolver.Click
@@ -61,7 +64,7 @@
         frm.ShowDialog()
     End Sub
 
-    Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
+    Private Sub BVecinos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BVecinos.Click
         'forma modal de abrir un formulario
         Dim frm As New FListados()
 
@@ -70,7 +73,7 @@
         frm.ShowDialog()
     End Sub
 
-    Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
+    Private Sub BGastos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BGastos.Click
         'forma modal de abrir un formulario
         Dim frm As New FListados()
 
@@ -79,11 +82,20 @@
         frm.ShowDialog()
     End Sub
 
-    Private Sub Button10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button10.Click
+    Private Sub BIngresos_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BIngresos.Click
         'forma modal de abrir un formulario
         Dim frm As New FListados()
 
         listado = "ingresos"
+
+        frm.ShowDialog()
+    End Sub
+
+    Private Sub BProveedores_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BProveedores.Click
+        'forma modal de abrir un formulario
+        Dim frm As New FListados()
+
+        listado = "proveedor"
 
         frm.ShowDialog()
     End Sub
