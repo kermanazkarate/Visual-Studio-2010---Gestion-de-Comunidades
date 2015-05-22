@@ -18,6 +18,7 @@ Public Class FAltaCV
 
         accion = "nada"
         MostrarSituacionInicial()
+
         ds.Clear()
 
         'BuscarUltimoCdComunidad()
@@ -210,7 +211,7 @@ Public Class FAltaCV
 
     Private Sub DarDeAltaDatos()
 
-        Dim cb As New OleDb.OleDbCommandBuilder(da)
+        Dim cb As New OleDb.OleDbCommandBuilder(da)  ' Es obligatorio para luego usar da.Update(ds, "comunidad")
 
         Dim dsNewRow As DataRow
 
@@ -263,6 +264,8 @@ Public Class FAltaCV
             'Creamos los datos de los vecinos con los datos de la nueva comunidad introducidos
             'Pasamos como parametros el Nº de plantas, Nº de vecinos por planta y Total vecinos
             CrearVecinos(CInt(Textcod.Text), CInt(Textnplantas.Text), CInt(Textvplanta.Text), CInt(Texttvecinos.Text))
+
+
 
         End If
 

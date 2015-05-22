@@ -335,7 +335,7 @@ Partial Class FAltaCV
         '
         'BAceptar
         '
-        Me.BAceptar.Location = New System.Drawing.Point(695, 373)
+        Me.BAceptar.Location = New System.Drawing.Point(695, 376)
         Me.BAceptar.Name = "BAceptar"
         Me.BAceptar.Size = New System.Drawing.Size(76, 29)
         Me.BAceptar.TabIndex = 29
@@ -344,7 +344,7 @@ Partial Class FAltaCV
         '
         'BCancelar
         '
-        Me.BCancelar.Location = New System.Drawing.Point(695, 321)
+        Me.BCancelar.Location = New System.Drawing.Point(695, 417)
         Me.BCancelar.Name = "BCancelar"
         Me.BCancelar.Size = New System.Drawing.Size(76, 29)
         Me.BCancelar.TabIndex = 30

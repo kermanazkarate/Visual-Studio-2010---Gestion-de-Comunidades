@@ -48,16 +48,18 @@
 
         miComunidad = Me.CBComunidad.SelectedItem.ToString
 
-
         For i = 0 To MaxRows - 1
 
             c1 = CStr(ds.Tables("comunidad").Rows(i).Item("calle"))
             c2 = CStr(ds.Tables("comunidad").Rows(i).Item("numero"))
+
             crtdo = c1 & " " & c2
 
-            If miComunidad.Equals(crtdo) Then
+            'MsgBox(miComunidad & " = " & crtdo)
+
+            If miComunidad = "C/ " & crtdo Then
                 codComunidad = CInt(ds.Tables("comunidad").Rows(i).Item("codcomunidad"))
-                ' MsgBox("codComunidad: " & codComunidad)
+                'MsgBox("codComunidad: " & codComunidad)
             End If
 
         Next

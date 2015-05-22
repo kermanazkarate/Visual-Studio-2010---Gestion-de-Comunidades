@@ -29,7 +29,7 @@ Module Funciones
     ' Public sql As String
 
     Public da As OleDb.OleDbDataAdapter   'para comunidad
-    Dim daa As OleDb.OleDbDataAdapter     'para vecinos
+    Public daa As OleDb.OleDbDataAdapter     'para vecinos
 
 
     'para crear el conjunto de datos, el DataSet
@@ -115,6 +115,37 @@ Module Funciones
 
     End Function
 
+    Public Sub BuscarVecinosPorComunidad(ByVal miCodComunidad As Integer)
+
+        Dim sql As String
+
+        Try
+            'conecto y abro de nuevo la base de datos
+            con.ConnectionString = dbProvider & dbSource
+            con.Open()
+
+            'Solo muestros las comunidades que estan activas y no se han dado de baja
+            sql = "SELECT * FROM vecinos WHERE ccomunidad = " & miCodComunidad & " ORDER BY codvecino"
+
+            da = New OleDb.OleDbDataAdapter(sql, con)
+
+            'Llenamos el DataSet con la informacion de la tabla comunidad
+            da.Fill(ds, "vecinos")  'ds es el DataSet. da es TableAdapter
+            con.Close()
+
+            'recojo el nro de filas actuales en la tabla
+            MaxRows = ds.Tables("vecinos").Rows.Count
+
+            'MsgBox("MaxRows: " & MaxRows)
+
+            'preparo el índice que indica en que Posición estoy
+            inc = 0  ' Los registros de la base de datos empiezan en el registro 0
+
+        Catch ex As Exception
+            MsgBox("Excepción: " & ex.Message)
+        End Try
+
+    End Sub
 
     'Me conecto a la base de datos y busco el último codvecino guardado
     Public Function BuscarUltimoCdVecinos() As Integer
@@ -134,7 +165,7 @@ Module Funciones
 
         Try
             'conecto con la base de datos
-            con.ConnectionString = dbProvider & dbSource
+            conn.ConnectionString = dbProvider & dbSource
 
             'abro la base de datos
             conn.Open()
@@ -151,13 +182,21 @@ Module Funciones
             'recojo el nro de filas actuales en la tabla
             MaxRows = dss.Tables("vecinos").Rows.Count
 
-            'guardo el valor del codcomunidad mas alto que hay en la base de datos
-            valor = CInt(ds.Tables("vecinos").Rows(MaxRows - 1).Item("codvecino"))
+            'MsgBox("MaxRows Vecinos:" & MaxRows)
 
-            dss.Clear()
+            If MaxRows = 0 Then
+                valor = 0
+            Else
+                'guardo el valor del codcomunidad mas alto que hay en la base de datos
+                valor = CInt(dss.Tables("vecinos").Rows(MaxRows - 1).Item("codvecino"))
+            End If
+
+
+
+            'dss.Clear()
 
         Catch ex As Exception
-            MsgBox("Excepción: " & ex.Message)
+            MsgBox("Excepción Cod. Último Vencino: " & ex.Message)
         End Try
 
         Return valor
@@ -167,53 +206,91 @@ Module Funciones
     Public Sub CrearVecinos(ByVal codComuni As Integer, ByVal nPltas As Integer, ByVal nVecPlta As Integer, ByVal nTotalVec As Integer)
         ' codComuni = Codigo Comunidad, nPltas = nº de plantas ; nVecPlta = nº de vecinos por plantas (una letra a cada vecino) ; nTotalVec = vecinos totales; 
 
-        Dim cb As New OleDb.OleDbCommandBuilder(da)
+        Dim cb As New OleDb.OleDbCommandBuilder(daa)  ' Es obligatorio para luego usar daa.Update(dss, "vecinos")
 
-        Dim dsNewRow As DataRow
+        Dim dssNewRow As DataRow
 
 
-        Dim codigo, piso, totVecinos, codAscii As Integer
+        Dim codigo, piso, perPiso, totVecinos, codAscii As Integer
         Dim letra As Char
 
         'Pasos:
 
         '1 - Buscar el último codvecino guardado en la tabla vecinos
         codigo = BuscarUltimoCdVecinos()
-        MsgBox("´Cod Ultimo vecino introducido: " & codigo)
 
-        '2 - añadir registros al la tabla vecinos igual al ntv
+        MsgBox("Último codvecino introducido: " & codigo)
+
+        ''2 - añadir registros al la tabla vecinos igual al nTotalVec, a partir del cod último encontrado
 
         'Las letras mayusculas A-Z van del codigo ascii 65 al 90
         codAscii = 64
 
+        codigo = codigo + 1
         piso = 1
-
+        perPiso = 1
+        totVecinos = 1
+        MsgBox("codigo: " & codigo)
 
         While piso <= nPltas Or totVecinos <= nTotalVec
 
-            For index = 1 To nVecPlta
+            While perPiso <= nVecPlta 'Or totVecinos >= nTotalVec
 
-                dsNewRow = dss.Tables("vecinos").NewRow
+                Try
 
-                codigo = codigo + 1
-                dsNewRow.Item("codvecinos") = CInt(codigo)
+                    dssNewRow = dss.Tables("vecinos").NewRow
 
-                dsNewRow.Item("piso") = CInt(piso)
+                    dssNewRow.Item("codvecino") = CInt(codigo)
 
-                codAscii = codAscii + 1
-                letra = Chr(codAscii)
-                dsNewRow.Item("letra") = CStr(letra)
+                    dssNewRow.Item("piso") = CInt(piso)
 
-                dsNewRow.Item("ccomunidad") = CInt(codComuni)
+                    codAscii = codAscii + 1
+                    letra = Chr(codAscii)
+                    dssNewRow.Item("letra") = CStr(letra)
 
-                dss.Tables("comunidad").Rows.Add(dsNewRow)
-                daa.Update(ds, "comunidad")
-            Next
+                    dssNewRow.Item("nombre") = CStr("")
+                    dssNewRow.Item("tel1") = CStr("")
+                    dssNewRow.Item("tel2") = CStr("")
 
+                    'MsgBox("codComunidad Creada: " & codComuni)
+                    dssNewRow.Item("ccomunidad") = CInt(codComuni)
+
+                    dss.Tables("vecinos").Rows.Add(dssNewRow)
+
+                    'recojo el nro de filas actuales en la tabla
+                    MaxRows = dss.Tables("vecinos").Rows.Count
+                    MsgBox("´MaxRows Vecinos: " & MaxRows)
+
+                    MsgBox("codigo: " & codigo)
+                    MsgBox("piso: " & piso)
+                    MsgBox("perPiso: " & perPiso)
+                    MsgBox("letra: " & letra)
+                    MsgBox("totVecinos: " & totVecinos)
+
+                    codigo = codigo + 1
+                    perPiso = perPiso + 1
+                    totVecinos = totVecinos + 1
+
+
+
+                Catch ex As Exception
+                    MsgBox("Error Añadir Vecinos: " & ex.Message)
+
+                End Try
+
+            End While
+
+            perPiso = 1
             piso = piso + 1
+            codAscii = 64
+
+            MsgBox("piso: " & piso)
 
         End While
 
+        daa.Update(dss, "vecinos")
+
+        dss.Clear()
 
     End Sub
 

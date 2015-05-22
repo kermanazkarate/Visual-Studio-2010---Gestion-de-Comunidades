@@ -29,14 +29,14 @@ Partial Class FVecinosComunidad
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TBcodigo = New System.Windows.Forms.TextBox()
+        Me.TBpiso = New System.Windows.Forms.TextBox()
+        Me.TBletra = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.TBnombre = New System.Windows.Forms.TextBox()
+        Me.TBtel1 = New System.Windows.Forms.TextBox()
+        Me.TBtel2 = New System.Windows.Forms.TextBox()
+        Me.Bmodificar = New System.Windows.Forms.Button()
         Me.Textnreg = New System.Windows.Forms.TextBox()
         Me.Badelante = New System.Windows.Forms.Button()
         Me.Batras = New System.Windows.Forms.Button()
@@ -45,7 +45,7 @@ Partial Class FVecinosComunidad
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.BCancelar = New System.Windows.Forms.Button()
         Me.BAceptar = New System.Windows.Forms.Button()
-        Me.CBComunidad = New System.Windows.Forms.ComboBox()
+        Me.CBvecinos = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.TBComunidad = New System.Windows.Forms.TextBox()
         Me.GroupBox1.SuspendLayout()
@@ -114,26 +114,26 @@ Partial Class FVecinosComunidad
         Me.Label6.TabIndex = 37
         Me.Label6.Text = "Tel2"
         '
-        'TextBox1
+        'TBcodigo
         '
-        Me.TextBox1.Location = New System.Drawing.Point(76, 60)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(87, 20)
-        Me.TextBox1.TabIndex = 38
+        Me.TBcodigo.Location = New System.Drawing.Point(76, 60)
+        Me.TBcodigo.Name = "TBcodigo"
+        Me.TBcodigo.Size = New System.Drawing.Size(87, 20)
+        Me.TBcodigo.TabIndex = 38
         '
-        'TextBox2
+        'TBpiso
         '
-        Me.TextBox2.Location = New System.Drawing.Point(234, 60)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(79, 20)
-        Me.TextBox2.TabIndex = 39
+        Me.TBpiso.Location = New System.Drawing.Point(234, 60)
+        Me.TBpiso.Name = "TBpiso"
+        Me.TBpiso.Size = New System.Drawing.Size(79, 20)
+        Me.TBpiso.TabIndex = 39
         '
-        'TextBox3
+        'TBletra
         '
-        Me.TextBox3.Location = New System.Drawing.Point(382, 60)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(84, 20)
-        Me.TextBox3.TabIndex = 40
+        Me.TBletra.Location = New System.Drawing.Point(382, 60)
+        Me.TBletra.Name = "TBletra"
+        Me.TBletra.Size = New System.Drawing.Size(84, 20)
+        Me.TBletra.TabIndex = 40
         '
         'Label7
         '
@@ -144,35 +144,35 @@ Partial Class FVecinosComunidad
         Me.Label7.TabIndex = 41
         Me.Label7.Text = "Nombre:"
         '
-        'TextBox4
+        'TBnombre
         '
-        Me.TextBox4.Location = New System.Drawing.Point(76, 107)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(390, 20)
-        Me.TextBox4.TabIndex = 42
+        Me.TBnombre.Location = New System.Drawing.Point(76, 107)
+        Me.TBnombre.Name = "TBnombre"
+        Me.TBnombre.Size = New System.Drawing.Size(390, 20)
+        Me.TBnombre.TabIndex = 42
         '
-        'TextBox5
+        'TBtel1
         '
-        Me.TextBox5.Location = New System.Drawing.Point(76, 152)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(167, 20)
-        Me.TextBox5.TabIndex = 43
+        Me.TBtel1.Location = New System.Drawing.Point(76, 152)
+        Me.TBtel1.Name = "TBtel1"
+        Me.TBtel1.Size = New System.Drawing.Size(167, 20)
+        Me.TBtel1.TabIndex = 43
         '
-        'TextBox6
+        'TBtel2
         '
-        Me.TextBox6.Location = New System.Drawing.Point(299, 152)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(167, 20)
-        Me.TextBox6.TabIndex = 44
+        Me.TBtel2.Location = New System.Drawing.Point(299, 152)
+        Me.TBtel2.Name = "TBtel2"
+        Me.TBtel2.Size = New System.Drawing.Size(167, 20)
+        Me.TBtel2.TabIndex = 44
         '
-        'Button1
+        'Bmodificar
         '
-        Me.Button1.Location = New System.Drawing.Point(236, 375)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(135, 25)
-        Me.Button1.TabIndex = 45
-        Me.Button1.Text = "Modificar"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Bmodificar.Location = New System.Drawing.Point(236, 375)
+        Me.Bmodificar.Name = "Bmodificar"
+        Me.Bmodificar.Size = New System.Drawing.Size(135, 25)
+        Me.Bmodificar.TabIndex = 45
+        Me.Bmodificar.Text = "Modificar"
+        Me.Bmodificar.UseVisualStyleBackColor = True
         '
         'Textnreg
         '
@@ -223,13 +223,13 @@ Partial Class FVecinosComunidad
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.TextBox6)
-        Me.GroupBox1.Controls.Add(Me.TextBox5)
-        Me.GroupBox1.Controls.Add(Me.TextBox4)
+        Me.GroupBox1.Controls.Add(Me.TBtel2)
+        Me.GroupBox1.Controls.Add(Me.TBtel1)
+        Me.GroupBox1.Controls.Add(Me.TBnombre)
         Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.TextBox3)
-        Me.GroupBox1.Controls.Add(Me.TextBox2)
-        Me.GroupBox1.Controls.Add(Me.TextBox1)
+        Me.GroupBox1.Controls.Add(Me.TBletra)
+        Me.GroupBox1.Controls.Add(Me.TBpiso)
+        Me.GroupBox1.Controls.Add(Me.TBcodigo)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label4)
@@ -259,13 +259,13 @@ Partial Class FVecinosComunidad
         Me.BAceptar.Text = "Aceptar"
         Me.BAceptar.UseVisualStyleBackColor = True
         '
-        'CBComunidad
+        'CBvecinos
         '
-        Me.CBComunidad.FormattingEnabled = True
-        Me.CBComunidad.Location = New System.Drawing.Point(212, 65)
-        Me.CBComunidad.Name = "CBComunidad"
-        Me.CBComunidad.Size = New System.Drawing.Size(251, 21)
-        Me.CBComunidad.TabIndex = 56
+        Me.CBvecinos.FormattingEnabled = True
+        Me.CBvecinos.Location = New System.Drawing.Point(212, 65)
+        Me.CBvecinos.Name = "CBvecinos"
+        Me.CBvecinos.Size = New System.Drawing.Size(251, 21)
+        Me.CBvecinos.TabIndex = 56
         '
         'Label8
         '
@@ -292,7 +292,7 @@ Partial Class FVecinosComunidad
         Me.ClientSize = New System.Drawing.Size(600, 501)
         Me.Controls.Add(Me.TBComunidad)
         Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.CBComunidad)
+        Me.Controls.Add(Me.CBvecinos)
         Me.Controls.Add(Me.BCancelar)
         Me.Controls.Add(Me.BAceptar)
         Me.Controls.Add(Me.GroupBox1)
@@ -301,7 +301,7 @@ Partial Class FVecinosComunidad
         Me.Controls.Add(Me.Batras)
         Me.Controls.Add(Me.Bfin)
         Me.Controls.Add(Me.Binicio)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.Bmodificar)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.BtVolver)
         Me.Name = "FVecinosComunidad"
@@ -320,14 +320,14 @@ Partial Class FVecinosComunidad
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
+    Friend WithEvents TBcodigo As System.Windows.Forms.TextBox
+    Friend WithEvents TBpiso As System.Windows.Forms.TextBox
+    Friend WithEvents TBletra As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox5 As System.Windows.Forms.TextBox
-    Friend WithEvents TextBox6 As System.Windows.Forms.TextBox
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents TBnombre As System.Windows.Forms.TextBox
+    Friend WithEvents TBtel1 As System.Windows.Forms.TextBox
+    Friend WithEvents TBtel2 As System.Windows.Forms.TextBox
+    Friend WithEvents Bmodificar As System.Windows.Forms.Button
     Friend WithEvents Textnreg As System.Windows.Forms.TextBox
     Friend WithEvents Badelante As System.Windows.Forms.Button
     Friend WithEvents Batras As System.Windows.Forms.Button
@@ -336,7 +336,7 @@ Partial Class FVecinosComunidad
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents BCancelar As System.Windows.Forms.Button
     Friend WithEvents BAceptar As System.Windows.Forms.Button
-    Friend WithEvents CBComunidad As System.Windows.Forms.ComboBox
+    Friend WithEvents CBvecinos As System.Windows.Forms.ComboBox
     Friend WithEvents Label8 As System.Windows.Forms.Label
     Friend WithEvents TBComunidad As System.Windows.Forms.TextBox
 End Class
