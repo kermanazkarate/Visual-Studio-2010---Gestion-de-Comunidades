@@ -191,8 +191,6 @@ Module Funciones
                 valor = CInt(dss.Tables("vecinos").Rows(MaxRows - 1).Item("codvecino"))
             End If
 
-
-
             'dss.Clear()
 
         Catch ex As Exception
@@ -204,37 +202,48 @@ Module Funciones
     End Function
 
     Public Sub CrearVecinos(ByVal codComuni As Integer, ByVal nPltas As Integer, ByVal nVecPlta As Integer, ByVal nTotalVec As Integer)
-        ' codComuni = Codigo Comunidad, nPltas = nº de plantas ; nVecPlta = nº de vecinos por plantas (una letra a cada vecino) ; nTotalVec = vecinos totales; 
 
         Dim cb As New OleDb.OleDbCommandBuilder(daa)  ' Es obligatorio para luego usar daa.Update(dss, "vecinos")
-
         Dim dssNewRow As DataRow
 
+        'Dim lineas As Integer
 
-        Dim codigo, piso, perPiso, totVecinos, codAscii As Integer
-        Dim letra As Char
+        Dim codigo As Integer
+        Dim codAscii, finAscci As Integer
+        Dim letra As String
+        Dim piso As Integer
 
-        'Pasos:
+        'dssNewRow = ds.Tables("vecinos").NewRow
+
+        'MsgBox("Voy a crear los vecinos de esta comunidad")
 
         '1 - Buscar el último codvecino guardado en la tabla vecinos
         codigo = BuscarUltimoCdVecinos()
 
-        MsgBox("Último codvecino introducido: " & codigo)
+        'MsgBox("Código ultimo vecino guardado es 6 y sale = " & codigo)
 
-        ''2 - añadir registros al la tabla vecinos igual al nTotalVec, a partir del cod último encontrado
+        '2- Compruebo que el Dataset con los registros de los vecinos esta lleno
+
+        'lineas = dss.Tables("vecinos").Rows.Count
+
+        'MsgBox("Nº filas en Vecinos: " & lineas)
+
+        '3 - añadir registros al la tabla vecinos igual al nTotalVec, a partir del cod último encontrado
 
         'Las letras mayusculas A-Z van del codigo ascii 65 al 90
-        codAscii = 64
+        codAscii = 65
+        letra = Chr(codAscii)
+        finAscci = codAscii + nVecPlta
 
         codigo = codigo + 1
         piso = 1
-        perPiso = 1
-        totVecinos = 1
-        MsgBox("codigo: " & codigo)
 
-        While piso <= nPltas Or totVecinos <= nTotalVec
+        'MsgBox("finAsccia: " & finAscci)
 
-            While perPiso <= nVecPlta 'Or totVecinos >= nTotalVec
+        While piso <= nPltas
+
+            While codAscii < finAscci
+                'MsgBox("Piso: " & piso & " Letra: " & letra)
 
                 Try
 
@@ -244,8 +253,6 @@ Module Funciones
 
                     dssNewRow.Item("piso") = CInt(piso)
 
-                    codAscii = codAscii + 1
-                    letra = Chr(codAscii)
                     dssNewRow.Item("letra") = CStr(letra)
 
                     dssNewRow.Item("nombre") = CStr("")
@@ -256,42 +263,31 @@ Module Funciones
                     dssNewRow.Item("ccomunidad") = CInt(codComuni)
 
                     dss.Tables("vecinos").Rows.Add(dssNewRow)
+                    daa.Update(dss, "vecinos")
 
-                    'recojo el nro de filas actuales en la tabla
-                    MaxRows = dss.Tables("vecinos").Rows.Count
-                    MsgBox("´MaxRows Vecinos: " & MaxRows)
-
-                    MsgBox("codigo: " & codigo)
-                    MsgBox("piso: " & piso)
-                    MsgBox("perPiso: " & perPiso)
-                    MsgBox("letra: " & letra)
-                    MsgBox("totVecinos: " & totVecinos)
-
-                    codigo = codigo + 1
-                    perPiso = perPiso + 1
-                    totVecinos = totVecinos + 1
-
-
+                    'lineas = dss.Tables("vecinos").Rows.Count
+                    'MsgBox("Nº filas Totales en Vecinos: " & lineas)
 
                 Catch ex As Exception
                     MsgBox("Error Añadir Vecinos: " & ex.Message)
 
                 End Try
 
+                codAscii = codAscii + 1
+                letra = Chr(codAscii)
+                'MsgBox("codAscii: " & codAscii & " finAscci: " & finAscci)
             End While
 
-            perPiso = 1
+
             piso = piso + 1
-            codAscii = 64
-
-            MsgBox("piso: " & piso)
-
+            codAscii = 65
+            letra = Chr(codAscii)
         End While
 
-        daa.Update(dss, "vecinos")
+        'MsgBox("Piso Final: " & piso & " Letra Final: " & letra)
 
-        dss.Clear()
-
+        'dss.Clear()
+        MsgBox(nTotalVec & " nuevos vecinos guardados")
     End Sub
 
     Public Sub ConectarVecinos(ByVal comuni As String)

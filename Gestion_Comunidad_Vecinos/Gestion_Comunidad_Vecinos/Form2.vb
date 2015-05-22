@@ -9,9 +9,18 @@ Public Class FAltaCV
 
 
     Private Sub BVolver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BVolver.Click
+
+        'Dim frm As New FAltaCV
+
+        'frm.ShowDialog()
+        'frm.Show()
+
         'FInicio.BringToFront()
+
         FInicio.Enabled = True
+
         Me.Close()
+
     End Sub
 
     Private Sub FAltaCV_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -39,6 +48,14 @@ Public Class FAltaCV
         FInicio.Enabled = False
 
     End Sub
+
+    'Private Sub FAltaCV_Leave(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Leave
+
+    '    ds.Clear()
+
+    '    'BuscarUltimoCdComunidad()
+    '    ConectarComunidad()
+    'End Sub
 
     Private Sub BModificaciones_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BModificaciones.Click
 
@@ -201,7 +218,7 @@ Public Class FAltaCV
 
             da.Update(ds, "comunidad")
 
-            MsgBox("Datos actualizados correctamente?", CType(0, MsgBoxStyle), "Aviso")
+            MsgBox("Datos actualizados correctamente", CType(0, MsgBoxStyle), "Aviso")
 
         Catch ex As Exception
             MsgBox("Error Modificación: " & ex.Message)
@@ -241,7 +258,7 @@ Public Class FAltaCV
                 inc = MaxRows - 1
                 Textnreg.Text = CStr(inc + 1) & " / " & CStr(MaxRows)
 
-                MsgBox("Nuevo registro añadido a la base de datos")
+                MsgBox("Nueva Comunidad de Vecinos añadida a la base de datos")
 
             Catch ex As Exception
                 MsgBox("Error Alta: " & ex.Message)
@@ -263,9 +280,9 @@ Public Class FAltaCV
             '---CREAR VECINOS---
             'Creamos los datos de los vecinos con los datos de la nueva comunidad introducidos
             'Pasamos como parametros el Nº de plantas, Nº de vecinos por planta y Total vecinos
-            CrearVecinos(CInt(Textcod.Text), CInt(Textnplantas.Text), CInt(Textvplanta.Text), CInt(Texttvecinos.Text))
 
-
+            'dss.Clear()
+            'CrearVecinos(CInt(Textcod.Text), CInt(Textnplantas.Text), CInt(Textvplanta.Text), CInt(Texttvecinos.Text))
 
         End If
 
@@ -288,17 +305,17 @@ Public Class FAltaCV
 
             da.Update(ds, "comunidad")
 
-            MsgBox("Registro Borrado de la base de datos")
+            MsgBox("Comunidad de Vecionos Borrada de la base de datos")
 
             accion = "nada"
 
             MostrarSituacionInicial()
 
-            ds.Clear()
+            'ds.Clear()
 
             ConectarComunidad()
 
-            MsgBox(inc)
+            'MsgBox(inc)
 
             MostrarRegistros(inc)
 
@@ -676,5 +693,5 @@ Public Class FAltaCV
         PictureBox2.Enabled = True
 
     End Sub
-
+    
 End Class
